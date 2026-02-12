@@ -9,28 +9,31 @@
 ## Phase 1: Project Scaffolding & Surface Tree Types
 
 ### 1.1 Cargo Project Setup
-- [ ] Create Cargo library crate `pepl-ui`
-- [ ] Configure dependencies: `serde`, `serde_json`
-- [ ] Define `Surface` type (the abstract UI tree)
-- [ ] Define `SurfaceNode` (type, props, children)
-- [ ] Define `PropValue` enum (String, Number, Bool, Color, ActionRef, Lambda, List, Record, Nil)
-- [ ] Define serialization to JSON (matching the host WASM contract view tree format)
-- [ ] Workspace-level `cargo build` succeeds
+- [x] Create Cargo library crate `pepl-ui`
+- [x] Configure dependencies: `serde`, `serde_json`
+- [x] Define `Surface` type (the abstract UI tree)
+- [x] Define `SurfaceNode` (type, props, children)
+- [x] Define `PropValue` enum (String, Number, Bool, Color, ActionRef, Lambda, List, Record, Nil)
+- [x] Define serialization to JSON (matching the host WASM contract view tree format)
+- [x] Workspace-level `cargo build` succeeds
 
 ### 1.2 Component Registry
-- [ ] Define `ComponentDef` trait (name, required props, optional props, accepts children)
-- [ ] Create component registry with all 10 Phase 0 components
-- [ ] Component name validation: unknown names → error E402
-- [ ] Unit tests for registry lookup and E402 error
+- [x] Define `ComponentDef` trait (name, required props, optional props, accepts children)
+- [x] Create component registry with all 10 Phase 0 components
+- [x] Component name validation: unknown names → error E402
+- [x] Unit tests for registry lookup and E402 error
 
 ### 1.3 Shared Types
-- [ ] Define `dimension` type: `Px(number) | Auto | Fill | Percent(number)`
-- [ ] Define `edges` type: `Uniform(number) | Sides(top, bottom, start, end)`
-- [ ] Define `alignment` type: `Start | Center | End | Stretch | SpaceBetween | SpaceAround`
-- [ ] Define `border_style` type: `{ width, color, style? }`
-- [ ] Define `shadow_style` type: `{ offset_x, offset_y, blur, color }`
-- [ ] Number literal coercion: `width: 100` → `Px(100)`, `padding: 16` → `Uniform(16)`
-- [ ] Unit tests for type coercions
+- [x] Define `dimension` type: `Px(number) | Auto | Fill | Percent(number)`
+- [x] Define `edges` type: `Uniform(number) | Sides(top, bottom, start, end)`
+- [x] Define `alignment` type: `Start | Center | End | Stretch | SpaceBetween | SpaceAround`
+- [x] Define `border_style` type: `{ width, color, style? }`
+- [x] Define `shadow_style` type: `{ offset_x, offset_y, blur, color }`
+- [x] Number literal coercion: `width: 100` → `Px(100)`, `padding: 16` → `Uniform(16)`
+- [x] Unit tests for type coercions
+- [x] Surface schema freeze test: serialize a representative Surface tree to JSON, assert byte-for-byte stability
+
+> **API FREEZE:** After Phase 1, the `Surface`, `SurfaceNode`, and `PropValue` types are **frozen**. All subsequent phases add component definitions — they do not change the Surface tree structure. This stability is critical because golden references (M3) and WASM validation (M4) depend on identical serialization.
 
 ---
 
