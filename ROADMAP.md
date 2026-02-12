@@ -2,6 +2,7 @@
 
 > 10 Phase 0 components: platform-abstract, accessibility-first, deterministic rendering.
 > Components produce Surface trees — the host's View Layer renders them.
+> See `ORCHESTRATION.md` for cross-repo sequencing.
 
 ---
 
