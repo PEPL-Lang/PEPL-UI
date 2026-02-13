@@ -29,12 +29,16 @@ pub use components::content::{
     ProgressBarBuilder, TextAlign, TextBuilder, TextOverflow, TextSize, TextWeight,
     validate_content_node,
 };
+pub use components::feedback::{
+    ModalBuilder, ToastBuilder, ToastType, validate_feedback_node,
+};
 pub use components::interactive::{
     ButtonBuilder, ButtonVariant, KeyboardType, TextInputBuilder, validate_interactive_node,
 };
 pub use components::layout::{
     ColumnBuilder, RowBuilder, ScrollBuilder, ScrollDirection, validate_layout_node,
 };
+pub use components::list::{ScrollListBuilder, validate_list_node};
 pub use prop_value::PropValue;
 pub use registry::{ComponentDef, ComponentRegistry, PropDef, PropRequirement};
 pub use surface::{Surface, SurfaceNode};

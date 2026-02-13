@@ -115,31 +115,31 @@
 ## Phase 5: List & Data Components
 
 ### 5.1 `ScrollList` Component
-- [ ] Props: `items: list<T>` (required), `render: (T, number) -> Surface` (required), `key: (T) -> string` (required), `on_reorder?: (list<T>) -> nil`, `dividers?: bool`
-- [ ] Accepts render function (lambda) for item rendering
-- [ ] Unit tests (item rendering, key function, dividers)
+- [x] Props: `items: list<T>` (required), `render: (T, number) -> Surface` (required), `key: (T) -> string` (required), `on_reorder?: (list<T>) -> nil`, `dividers?: bool`
+- [x] Accepts render function (lambda) for item rendering
+- [x] Unit tests (item rendering, key function, dividers)
 
 ### 5.2 List Tests
-- [ ] Test ScrollList with various item types
-- [ ] 100-iteration determinism test
+- [x] Test ScrollList with various item types (15 tests: construction, props, JSON round-trip, validation, determinism)
+- [x] 100-iteration determinism test
 
 ---
 
 ## Phase 6: Feedback & Overlay Components
 
 ### 6.1 `Modal` Component
-- [ ] Props: `visible: bool` (required), `on_dismiss: () -> nil` (required), `title?: string`
-- [ ] Accepts children via second brace block: `Modal { props } { children }`
-- [ ] Unit tests (visible toggling, children serialization)
+- [x] Props: `visible: bool` (required), `on_dismiss: () -> nil` (required), `title?: string`
+- [x] Accepts children via second brace block: `Modal { props } { children }`
+- [x] Unit tests (visible toggling, children serialization)
 
 ### 6.2 `Toast` Component
-- [ ] Props: `message: string` (required), `duration?: number`, `type?: "info"|"success"|"warning"|"error"`
-- [ ] No children
-- [ ] Unit tests
+- [x] Props: `message: string` (required), `duration?: number`, `type?: "info"|"success"|"warning"|"error"`
+- [x] No children
+- [x] Unit tests
 
 ### 6.3 Feedback Tests
-- [ ] Test Modal with children
-- [ ] 100-iteration determinism test
+- [x] Test Modal with children (25 tests: construction, round-trip, validation, determinism)
+- [x] 100-iteration determinism test
 
 ---
 
