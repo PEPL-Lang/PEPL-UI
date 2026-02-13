@@ -94,21 +94,21 @@
 ## Phase 4: Interactive Components
 
 ### 4.1 `Button` Component
-- [ ] Props: `label: string` (required), `on_tap: () -> nil` (required), `variant?: "filled"|"outlined"|"text"`, `icon?: string`, `disabled?: bool`, `loading?: bool`
-- [ ] Action reference handling: `on_tap: action_name`, `on_tap: action_name(arg)`
-- [ ] No children
-- [ ] Unit tests (action binding, variants, disabled state)
+- [x] Props: `label: string` (required), `on_tap: () -> nil` (required), `variant?: "filled"|"outlined"|"text"`, `icon?: string`, `disabled?: bool`, `loading?: bool`
+- [x] Action reference handling: `on_tap: action_name`, `on_tap: action_name(arg)`
+- [x] No children
+- [x] Unit tests (action binding, variants, disabled state)
 
 ### 4.2 `TextInput` Component
-- [ ] Props: `value: string` (required), `on_change: (string) -> nil` (required), `placeholder?: string`, `label?: string`, `keyboard?: "text"|"number"|"email"|"phone"|"url"`, `max_length?: number`, `multiline?: bool`
-- [ ] Action reference / lambda callback handling for on_change
-- [ ] No children
-- [ ] Unit tests
+- [x] Props: `value: string` (required), `on_change: (string) -> nil` (required), `placeholder?: string`, `label?: string`, `keyboard?: "text"|"number"|"email"|"phone"|"url"`, `max_length?: number`, `multiline?: bool`
+- [x] Action reference / lambda callback handling for on_change
+- [x] No children
+- [x] Unit tests
 
 ### 4.3 Interactive Tests
-- [ ] Test action reference serialization in props
-- [ ] Test lambda callback serialization
-- [ ] 100-iteration determinism test
+- [x] Test action reference serialization in props
+- [x] Test lambda callback serialization
+- [x] 100-iteration determinism test
 
 ---
 

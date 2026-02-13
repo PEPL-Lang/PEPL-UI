@@ -2,7 +2,7 @@
 
 The PEPL UI component model — deterministic surface tree rendering for PEPL programs.
 
-**Status:** Phase 3 complete (Surface types + layout + content components). See [ROADMAP.md](ROADMAP.md) for progress.
+**Status:** Phase 4 complete (Surface types + layout + content + interactive components). See [ROADMAP.md](ROADMAP.md) for progress.
 
 ## Components
 
@@ -13,24 +13,25 @@ The PEPL UI component model — deterministic surface tree rendering for PEPL pr
 | Scroll | Layout | ✅ Done |
 | Text | Content | ✅ Done |
 | ProgressBar | Content | ✅ Done |
-| Button | Interactive | Planned (Phase 4) |
-| TextInput | Interactive | Planned (Phase 4) |
+| Button | Interactive | ✅ Done |
+| TextInput | Interactive | ✅ Done |
 | ScrollList | Collection | Planned (Phase 5) |
 | Modal | Overlay | Planned (Phase 6) |
 | Toast | Overlay | Planned (Phase 6) |
 
 ## Tests
 
-180 tests:
+236 tests:
 - Surface types & component registry: 42
 - Layout components (Column, Row, Scroll): 83
 - Content components (Text, ProgressBar): 55
+- Interactive components (Button, TextInput): 56
 
 ## Key Design Choices
 
 - **Deterministic:** Render budget caps computation (no infinite loops)
 - **Typed builders:** Each component has a validated builder with typed props
-- **Structural validation:** `validate_layout_node` checks prop types at build time
+- **Structural validation:** `validate_layout_node`, `validate_content_node`, `validate_interactive_node` check prop types at build time
 - **Edges coercion:** Uniform padding → per-side expansion
 
 ## Build

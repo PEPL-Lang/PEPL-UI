@@ -29,6 +29,9 @@ pub use components::content::{
     ProgressBarBuilder, TextAlign, TextBuilder, TextOverflow, TextSize, TextWeight,
     validate_content_node,
 };
+pub use components::interactive::{
+    ButtonBuilder, ButtonVariant, KeyboardType, TextInputBuilder, validate_interactive_node,
+};
 pub use components::layout::{
     ColumnBuilder, RowBuilder, ScrollBuilder, ScrollDirection, validate_layout_node,
 };
