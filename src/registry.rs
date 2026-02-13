@@ -149,6 +149,7 @@ impl ComponentDef for ColumnDef {
             PropDef { name: "spacing", requirement: PropRequirement::Optional, prop_type: PropType::Number },
             PropDef { name: "align", requirement: PropRequirement::Optional, prop_type: PropType::Alignment },
             PropDef { name: "padding", requirement: PropRequirement::Optional, prop_type: PropType::Edges },
+            PropDef { name: "accessible", requirement: PropRequirement::Optional, prop_type: PropType::Record },
         ];
         PROPS
     }
@@ -163,6 +164,7 @@ impl ComponentDef for RowDef {
             PropDef { name: "spacing", requirement: PropRequirement::Optional, prop_type: PropType::Number },
             PropDef { name: "align", requirement: PropRequirement::Optional, prop_type: PropType::Alignment },
             PropDef { name: "padding", requirement: PropRequirement::Optional, prop_type: PropType::Edges },
+            PropDef { name: "accessible", requirement: PropRequirement::Optional, prop_type: PropType::Record },
         ];
         PROPS
     }
@@ -179,6 +181,7 @@ impl ComponentDef for ScrollDef {
                 requirement: PropRequirement::Optional,
                 prop_type: PropType::StringEnum(&["vertical", "horizontal", "both"]),
             },
+            PropDef { name: "accessible", requirement: PropRequirement::Optional, prop_type: PropType::Record },
         ];
         PROPS
     }
@@ -201,6 +204,7 @@ impl ComponentDef for TextDef {
             PropDef { name: "align", requirement: PropRequirement::Optional, prop_type: PropType::StringEnum(&["start", "center", "end"]) },
             PropDef { name: "max_lines", requirement: PropRequirement::Optional, prop_type: PropType::Number },
             PropDef { name: "overflow", requirement: PropRequirement::Optional, prop_type: PropType::StringEnum(&["clip", "ellipsis", "wrap"]) },
+            PropDef { name: "accessible", requirement: PropRequirement::Optional, prop_type: PropType::Record },
         ];
         PROPS
     }
@@ -216,6 +220,7 @@ impl ComponentDef for ProgressBarDef {
             PropDef { name: "color", requirement: PropRequirement::Optional, prop_type: PropType::Color },
             PropDef { name: "background", requirement: PropRequirement::Optional, prop_type: PropType::Color },
             PropDef { name: "height", requirement: PropRequirement::Optional, prop_type: PropType::Number },
+            PropDef { name: "accessible", requirement: PropRequirement::Optional, prop_type: PropType::Record },
         ];
         PROPS
     }
@@ -237,6 +242,7 @@ impl ComponentDef for ButtonDef {
             PropDef { name: "icon", requirement: PropRequirement::Optional, prop_type: PropType::String },
             PropDef { name: "disabled", requirement: PropRequirement::Optional, prop_type: PropType::Bool },
             PropDef { name: "loading", requirement: PropRequirement::Optional, prop_type: PropType::Bool },
+            PropDef { name: "accessible", requirement: PropRequirement::Optional, prop_type: PropType::Record },
         ];
         PROPS
     }
@@ -255,6 +261,7 @@ impl ComponentDef for TextInputDef {
             PropDef { name: "keyboard", requirement: PropRequirement::Optional, prop_type: PropType::StringEnum(&["text", "number", "email", "phone", "url"]) },
             PropDef { name: "max_length", requirement: PropRequirement::Optional, prop_type: PropType::Number },
             PropDef { name: "multiline", requirement: PropRequirement::Optional, prop_type: PropType::Bool },
+            PropDef { name: "accessible", requirement: PropRequirement::Optional, prop_type: PropType::Record },
         ];
         PROPS
     }
@@ -275,6 +282,7 @@ impl ComponentDef for ScrollListDef {
             PropDef { name: "key", requirement: PropRequirement::Required, prop_type: PropType::Lambda },
             PropDef { name: "on_reorder", requirement: PropRequirement::Optional, prop_type: PropType::Lambda },
             PropDef { name: "dividers", requirement: PropRequirement::Optional, prop_type: PropType::Bool },
+            PropDef { name: "accessible", requirement: PropRequirement::Optional, prop_type: PropType::Record },
         ];
         PROPS
     }
@@ -293,6 +301,7 @@ impl ComponentDef for ModalDef {
             PropDef { name: "visible", requirement: PropRequirement::Required, prop_type: PropType::Bool },
             PropDef { name: "on_dismiss", requirement: PropRequirement::Required, prop_type: PropType::Action },
             PropDef { name: "title", requirement: PropRequirement::Optional, prop_type: PropType::String },
+            PropDef { name: "accessible", requirement: PropRequirement::Optional, prop_type: PropType::Record },
         ];
         PROPS
     }
@@ -307,6 +316,7 @@ impl ComponentDef for ToastDef {
             PropDef { name: "message", requirement: PropRequirement::Required, prop_type: PropType::String },
             PropDef { name: "duration", requirement: PropRequirement::Optional, prop_type: PropType::Number },
             PropDef { name: "type", requirement: PropRequirement::Optional, prop_type: PropType::StringEnum(&["info", "success", "warning", "error"]) },
+            PropDef { name: "accessible", requirement: PropRequirement::Optional, prop_type: PropType::Record },
         ];
         PROPS
     }

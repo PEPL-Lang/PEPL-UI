@@ -3,6 +3,7 @@
 //! ScrollList renders a scrollable list of items using a `render` lambda
 //! and a `key` function for identity. Items come from a list prop, not children.
 
+use crate::accessibility;
 use crate::prop_value::PropValue;
 use crate::surface::SurfaceNode;
 
@@ -59,6 +60,7 @@ impl ScrollListBuilder {
         if let Some(dividers) = self.dividers {
             node.set_prop("dividers", PropValue::Bool(dividers));
         }
+        accessibility::ensure_accessible(&mut node);
         node
     }
 }
@@ -137,11 +139,16 @@ fn validate_scroll_list(node: &SurfaceNode) -> Vec<String> {
         ));
     }
 
+    // Optional: accessible (record)
+    if let Some(prop) = node.props.get("accessible") {
+        errors.extend(accessibility::validate_accessible_prop("ScrollList", prop));
+    }
+
     // Unknown props
     for key in node.props.keys() {
         if !matches!(
             key.as_str(),
-            "items" | "render" | "key" | "on_reorder" | "dividers"
+            "items" | "render" | "key" | "on_reorder" | "dividers" | "accessible"
         ) {
             errors.push(format!("ScrollList: unknown prop '{key}'"));
         }

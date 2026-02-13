@@ -92,7 +92,7 @@ fn test_text_all_props() {
         .overflow(TextOverflow::Wrap)
         .build();
     assert_eq!(node.component_type, "Text");
-    assert_eq!(node.props.len(), 7);
+    assert_eq!(node.props.len(), 8);
     assert_eq!(node.props.get("value"), Some(&PropValue::String("Hello!".into())));
     assert_eq!(node.props.get("size"), Some(&PropValue::String("heading".into())));
     assert_eq!(node.props.get("weight"), Some(&PropValue::String("medium".into())));
@@ -386,7 +386,7 @@ fn test_progress_bar_all_props() {
         .height(12.0)
         .build();
     assert_eq!(node.component_type, "ProgressBar");
-    assert_eq!(node.props.len(), 4);
+    assert_eq!(node.props.len(), 5);
     assert_eq!(node.props.get("value"), Some(&PropValue::Number(0.75)));
     assert_eq!(node.props.get("height"), Some(&PropValue::Number(12.0)));
 }

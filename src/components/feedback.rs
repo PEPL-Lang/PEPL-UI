@@ -3,6 +3,7 @@
 //! Modal is a container component (accepts children via second brace block).
 //! Toast is a leaf notification component.
 
+use crate::accessibility;
 use crate::prop_value::PropValue;
 use crate::surface::SurfaceNode;
 
@@ -76,6 +77,7 @@ impl ModalBuilder {
         for child in self.children {
             node.add_child(child);
         }
+        accessibility::ensure_accessible(&mut node);
         node
     }
 }
@@ -123,6 +125,7 @@ impl ToastBuilder {
         if let Some(toast_type) = self.toast_type {
             node.set_prop("type", PropValue::String(toast_type.as_str().to_string()));
         }
+        accessibility::ensure_accessible(&mut node);
         node
     }
 }
@@ -176,9 +179,14 @@ fn validate_modal(node: &SurfaceNode) -> Vec<String> {
 
     // Children are allowed (Modal is a container)
 
+    // Optional: accessible (record)
+    if let Some(prop) = node.props.get("accessible") {
+        errors.extend(accessibility::validate_accessible_prop("Modal", prop));
+    }
+
     // Unknown props
     for key in node.props.keys() {
-        if !matches!(key.as_str(), "visible" | "on_dismiss" | "title") {
+        if !matches!(key.as_str(), "visible" | "on_dismiss" | "title" | "accessible") {
             errors.push(format!("Modal: unknown prop '{key}'"));
         }
     }
@@ -229,9 +237,14 @@ fn validate_toast(node: &SurfaceNode) -> Vec<String> {
         ));
     }
 
+    // Optional: accessible (record)
+    if let Some(prop) = node.props.get("accessible") {
+        errors.extend(accessibility::validate_accessible_prop("Toast", prop));
+    }
+
     // Unknown props
     for key in node.props.keys() {
-        if !matches!(key.as_str(), "message" | "duration" | "type") {
+        if !matches!(key.as_str(), "message" | "duration" | "type" | "accessible") {
             errors.push(format!("Toast: unknown prop '{key}'"));
         }
     }

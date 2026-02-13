@@ -3,6 +3,7 @@
 //! These are leaf components with no children. They handle user interactions
 //! via action references (`on_tap`) or lambda callbacks (`on_change`).
 
+use crate::accessibility;
 use crate::prop_value::PropValue;
 use crate::surface::SurfaceNode;
 
@@ -117,6 +118,7 @@ impl ButtonBuilder {
         if let Some(loading) = self.loading {
             node.set_prop("loading", PropValue::Bool(loading));
         }
+        accessibility::ensure_accessible(&mut node);
         node
     }
 }
@@ -197,6 +199,7 @@ impl TextInputBuilder {
         if let Some(multiline) = self.multiline {
             node.set_prop("multiline", PropValue::Bool(multiline));
         }
+        accessibility::ensure_accessible(&mut node);
         node
     }
 }
@@ -288,11 +291,16 @@ fn validate_button(node: &SurfaceNode) -> Vec<String> {
         ));
     }
 
+    // Optional: accessible (record)
+    if let Some(prop) = node.props.get("accessible") {
+        errors.extend(accessibility::validate_accessible_prop("Button", prop));
+    }
+
     // Unknown props
     for key in node.props.keys() {
         if !matches!(
             key.as_str(),
-            "label" | "on_tap" | "variant" | "icon" | "disabled" | "loading"
+            "label" | "on_tap" | "variant" | "icon" | "disabled" | "loading" | "accessible"
         ) {
             errors.push(format!("Button: unknown prop '{key}'"));
         }
@@ -384,12 +392,17 @@ fn validate_text_input(node: &SurfaceNode) -> Vec<String> {
         ));
     }
 
+    // Optional: accessible (record)
+    if let Some(prop) = node.props.get("accessible") {
+        errors.extend(accessibility::validate_accessible_prop("TextInput", prop));
+    }
+
     // Unknown props
     for key in node.props.keys() {
         if !matches!(
             key.as_str(),
             "value" | "on_change" | "placeholder" | "label" | "keyboard" | "max_length"
-                | "multiline"
+                | "multiline" | "accessible"
         ) {
             errors.push(format!("TextInput: unknown prop '{key}'"));
         }

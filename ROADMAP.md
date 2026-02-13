@@ -146,15 +146,15 @@
 ## Phase 7: Accessibility
 
 ### 7.1 Accessibility Primitives
-- [ ] Define `accessible()` function: `label: string`, `hint?: string`, `role?: string`, `value?: string`, `live_region?: "polite"|"assertive"`
-- [ ] Attach accessibility attributes to all 10 Phase 0 components
-- [ ] Default accessibility: auto-generate labels from content where possible (e.g., Button label → accessible label)
-- [ ] Unit tests for accessibility attribute serialization
+- [x] Define `accessible()` function: `label: string`, `hint?: string`, `role?: string`, `value?: string`, `live_region?: "polite"|"assertive"`
+- [x] Attach accessibility attributes to all 10 Phase 0 components
+- [x] Default accessibility: auto-generate labels from content where possible (e.g., Button label → accessible label)
+- [x] Unit tests for accessibility attribute serialization
 
 ### 7.2 Accessibility Roles
-- [ ] Map each component to default semantic role: Button→"button", TextInput→"textfield", etc.
-- [ ] Allow role override via `accessible()` prop
-- [ ] Unit tests for role mapping
+- [x] Map each component to default semantic role: Button→"button", TextInput→"textfield", etc.
+- [x] Allow role override via `accessible()` prop
+- [x] Unit tests for role mapping
 
 ---
 

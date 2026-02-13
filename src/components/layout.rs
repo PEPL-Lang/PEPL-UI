@@ -12,6 +12,7 @@
 //! | `Row` | `spacing?: number`, `align?: alignment`, `padding?: edges` | Yes |
 //! | `Scroll` | `direction?: "vertical"\|"horizontal"\|"both"` | Yes |
 
+use crate::accessibility;
 use crate::prop_value::PropValue;
 use crate::surface::SurfaceNode;
 use crate::types::{Alignment, Edges};
@@ -83,6 +84,7 @@ impl ColumnBuilder {
         }
 
         node.children = self.children;
+        accessibility::ensure_accessible(&mut node);
         node
     }
 }
@@ -154,6 +156,7 @@ impl RowBuilder {
         }
 
         node.children = self.children;
+        accessibility::ensure_accessible(&mut node);
         node
     }
 }
@@ -224,6 +227,7 @@ impl ScrollBuilder {
             PropValue::String(self.direction.as_str().to_string()),
         );
         node.children = self.children;
+        accessibility::ensure_accessible(&mut node);
         node
     }
 }
@@ -312,6 +316,12 @@ pub fn validate_layout_node(node: &SurfaceNode) -> Vec<String> {
                             ));
                         }
                     }
+                    "accessible" => {
+                        errors.extend(accessibility::validate_accessible_prop(
+                            &node.component_type,
+                            val,
+                        ));
+                    }
                     other => {
                         errors.push(format!(
                             "{}: unknown prop '{other}'",
@@ -336,6 +346,9 @@ pub fn validate_layout_node(node: &SurfaceNode) -> Vec<String> {
                                 val.type_name()
                             ));
                         }
+                    }
+                    "accessible" => {
+                        errors.extend(accessibility::validate_accessible_prop("Scroll", val));
                     }
                     other => {
                         errors.push(format!("Scroll: unknown prop '{other}'"));

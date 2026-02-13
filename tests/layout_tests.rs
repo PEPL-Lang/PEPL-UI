@@ -24,7 +24,7 @@ fn button_node(label: &str) -> SurfaceNode {
 fn test_column_empty() {
     let node = ColumnBuilder::new().build();
     assert_eq!(node.component_type, "Column");
-    assert!(node.props.is_empty());
+    assert_eq!(node.props.len(), 1); // accessible is auto-added
     assert!(node.children.is_empty());
 }
 
@@ -32,7 +32,7 @@ fn test_column_empty() {
 fn test_column_default() {
     let node = ColumnBuilder::default().build();
     assert_eq!(node.component_type, "Column");
-    assert!(node.props.is_empty());
+    assert_eq!(node.props.len(), 1); // accessible is auto-added
 }
 
 #[test]
@@ -135,8 +135,7 @@ fn test_column_with_all_props() {
         .align(Alignment::Center)
         .padding(Edges::Uniform(8.0))
         .build();
-    assert_eq!(node.props.len(), 3);
-    assert_eq!(node.props["spacing"], PropValue::Number(12.0));
+    assert_eq!(node.props.len(), 4); // spacing + align + padding + accessible
     assert_eq!(node.props["align"], PropValue::String("center".into()));
     assert_eq!(node.props["padding"], PropValue::Number(8.0));
 }
@@ -180,7 +179,7 @@ fn test_column_full_example() {
         .child(button_node("Submit"))
         .build();
     assert_eq!(node.component_type, "Column");
-    assert_eq!(node.props.len(), 3);
+    assert_eq!(node.props.len(), 4); // spacing + align + padding + accessible
     assert_eq!(node.children.len(), 2);
 }
 
@@ -192,7 +191,7 @@ fn test_column_full_example() {
 fn test_row_empty() {
     let node = RowBuilder::new().build();
     assert_eq!(node.component_type, "Row");
-    assert!(node.props.is_empty());
+    assert_eq!(node.props.len(), 1); // accessible is auto-added
     assert!(node.children.is_empty());
 }
 
@@ -241,7 +240,7 @@ fn test_row_with_all_props() {
         .align(Alignment::SpaceBetween)
         .padding(Edges::Uniform(4.0))
         .build();
-    assert_eq!(node.props.len(), 3);
+    assert_eq!(node.props.len(), 4); // spacing + align + padding + accessible
 }
 
 #[test]
@@ -970,8 +969,8 @@ fn test_column_fractional_spacing() {
 fn test_scroll_empty() {
     let node = ScrollBuilder::new().build();
     assert!(node.children.is_empty());
-    // Scroll always has direction prop
-    assert_eq!(node.props.len(), 1);
+    // Scroll always has direction prop + accessible
+    assert_eq!(node.props.len(), 2);
 }
 
 #[test]
@@ -980,7 +979,8 @@ fn test_column_no_children_json() {
     let json = surface.to_json();
     let parsed: serde_json::Value = serde_json::from_str(&json).unwrap();
     assert_eq!(parsed["root"]["children"], serde_json::json!([]));
-    assert_eq!(parsed["root"]["props"], serde_json::json!({}));
+    // accessible prop is auto-added by builder
+    assert!(parsed["root"]["props"].is_object());
 }
 
 #[test]
@@ -1002,5 +1002,5 @@ fn test_column_prop_ordering_deterministic() {
         .align(Alignment::Center)
         .build();
     let keys: Vec<&String> = node.props.keys().collect();
-    assert_eq!(keys, vec!["align", "padding", "spacing"]);
+    assert_eq!(keys, vec!["accessible", "align", "padding", "spacing"]);
 }

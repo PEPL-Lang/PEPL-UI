@@ -19,6 +19,7 @@
 //! | List & Data | ScrollList |
 //! | Feedback | Modal, Toast |
 
+pub mod accessibility;
 pub mod components;
 mod prop_value;
 mod registry;
@@ -43,3 +44,9 @@ pub use prop_value::PropValue;
 pub use registry::{ComponentDef, ComponentRegistry, PropDef, PropRequirement};
 pub use surface::{Surface, SurfaceNode};
 pub use types::{Alignment, BorderStyle, ColorValue, Dimension, Edges, ShadowStyle};
+
+// Accessibility
+pub use accessibility::{
+    AccessibilityInfo, LiveRegion, SemanticRole, auto_accessible, default_role,
+    ensure_accessible, validate_accessible_prop,
+};

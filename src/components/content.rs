@@ -3,6 +3,7 @@
 //! These are leaf components with no children. They render visible content
 //! for PEPL UI views.
 
+use crate::accessibility;
 use crate::prop_value::PropValue;
 use crate::surface::SurfaceNode;
 use crate::types::ColorValue;
@@ -192,6 +193,7 @@ impl TextBuilder {
         if let Some(overflow) = self.overflow {
             node.set_prop("overflow", PropValue::String(overflow.as_str().to_string()));
         }
+        accessibility::ensure_accessible(&mut node);
         node
     }
 }
@@ -261,6 +263,7 @@ impl ProgressBarBuilder {
         if let Some(height) = self.height {
             node.set_prop("height", PropValue::Number(height));
         }
+        accessibility::ensure_accessible(&mut node);
         node
     }
 }
@@ -364,11 +367,16 @@ fn validate_text(node: &SurfaceNode) -> Vec<String> {
         ));
     }
 
+    // Optional: accessible (record)
+    if let Some(prop) = node.props.get("accessible") {
+        errors.extend(accessibility::validate_accessible_prop("Text", prop));
+    }
+
     // Check for unknown props
     for key in node.props.keys() {
         if !matches!(
             key.as_str(),
-            "value" | "size" | "weight" | "color" | "align" | "max_lines" | "overflow"
+            "value" | "size" | "weight" | "color" | "align" | "max_lines" | "overflow" | "accessible"
         ) {
             errors.push(format!("Text: unknown prop '{key}'"));
         }
@@ -428,9 +436,14 @@ fn validate_progress_bar(node: &SurfaceNode) -> Vec<String> {
         ));
     }
 
+    // Optional: accessible (record)
+    if let Some(prop) = node.props.get("accessible") {
+        errors.extend(accessibility::validate_accessible_prop("ProgressBar", prop));
+    }
+
     // Check for unknown props
     for key in node.props.keys() {
-        if !matches!(key.as_str(), "value" | "color" | "background" | "height") {
+        if !matches!(key.as_str(), "value" | "color" | "background" | "height" | "accessible") {
             errors.push(format!("ProgressBar: unknown prop '{key}'"));
         }
     }
