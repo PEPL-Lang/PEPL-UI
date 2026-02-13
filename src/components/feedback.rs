@@ -186,7 +186,10 @@ fn validate_modal(node: &SurfaceNode) -> Vec<String> {
 
     // Unknown props
     for key in node.props.keys() {
-        if !matches!(key.as_str(), "visible" | "on_dismiss" | "title" | "accessible") {
+        if !matches!(
+            key.as_str(),
+            "visible" | "on_dismiss" | "title" | "accessible"
+        ) {
             errors.push(format!("Modal: unknown prop '{key}'"));
         }
     }

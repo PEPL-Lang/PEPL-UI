@@ -244,8 +244,7 @@ fn validate_button(node: &SurfaceNode) -> Vec<String> {
     // Optional: variant (string enum)
     if let Some(prop) = node.props.get("variant") {
         match prop {
-            PropValue::String(s)
-                if matches!(s.as_str(), "filled" | "outlined" | "text") => {}
+            PropValue::String(s) if matches!(s.as_str(), "filled" | "outlined" | "text") => {}
             _ => errors.push(format!(
                 "Button.variant: expected one of [filled, outlined, text], got {:?}",
                 prop
@@ -401,8 +400,14 @@ fn validate_text_input(node: &SurfaceNode) -> Vec<String> {
     for key in node.props.keys() {
         if !matches!(
             key.as_str(),
-            "value" | "on_change" | "placeholder" | "label" | "keyboard" | "max_length"
-                | "multiline" | "accessible"
+            "value"
+                | "on_change"
+                | "placeholder"
+                | "label"
+                | "keyboard"
+                | "max_length"
+                | "multiline"
+                | "accessible"
         ) {
             errors.push(format!("TextInput: unknown prop '{key}'"));
         }

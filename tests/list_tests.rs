@@ -131,7 +131,9 @@ fn scroll_list_missing_items() {
     node.set_prop("key", PropValue::lambda(1));
 
     let errors = validate_list_node(&node);
-    assert!(errors.iter().any(|e| e.contains("items") && e.contains("required")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("items") && e.contains("required")));
 }
 
 #[test]
@@ -141,7 +143,9 @@ fn scroll_list_missing_render() {
     node.set_prop("key", PropValue::lambda(1));
 
     let errors = validate_list_node(&node);
-    assert!(errors.iter().any(|e| e.contains("render") && e.contains("required")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("render") && e.contains("required")));
 }
 
 #[test]
@@ -151,7 +155,9 @@ fn scroll_list_missing_key() {
     node.set_prop("render", PropValue::lambda(1));
 
     let errors = validate_list_node(&node);
-    assert!(errors.iter().any(|e| e.contains("key") && e.contains("required")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("key") && e.contains("required")));
 }
 
 #[test]
@@ -162,7 +168,9 @@ fn scroll_list_wrong_items_type() {
     node.set_prop("key", PropValue::lambda(1));
 
     let errors = validate_list_node(&node);
-    assert!(errors.iter().any(|e| e.contains("items") && e.contains("expected list")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("items") && e.contains("expected list")));
 }
 
 #[test]
@@ -173,7 +181,9 @@ fn scroll_list_wrong_render_type() {
     node.set_prop("key", PropValue::lambda(1));
 
     let errors = validate_list_node(&node);
-    assert!(errors.iter().any(|e| e.contains("render") && e.contains("expected lambda")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("render") && e.contains("expected lambda")));
 }
 
 #[test]
@@ -185,7 +195,9 @@ fn scroll_list_wrong_on_reorder_type() {
     node.set_prop("on_reorder", PropValue::Number(42.0));
 
     let errors = validate_list_node(&node);
-    assert!(errors.iter().any(|e| e.contains("on_reorder") && e.contains("expected lambda")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("on_reorder") && e.contains("expected lambda")));
 }
 
 #[test]
@@ -211,7 +223,9 @@ fn scroll_list_unknown_prop() {
     node.set_prop("foo", PropValue::Bool(true));
 
     let errors = validate_list_node(&node);
-    assert!(errors.iter().any(|e| e.contains("unknown prop") && e.contains("foo")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("unknown prop") && e.contains("foo")));
 }
 
 // ══════════════════════════════════════════════════════════════════════════════

@@ -14,8 +14,7 @@ use pepl_ui::{
 
 #[test]
 fn modal_basic_construction() {
-    let node = ModalBuilder::new(true, PropValue::action("close_modal"))
-        .build();
+    let node = ModalBuilder::new(true, PropValue::action("close_modal")).build();
 
     assert_eq!(node.component_type, "Modal");
     assert_eq!(node.props.get("visible"), Some(&PropValue::Bool(true)));
@@ -100,7 +99,9 @@ fn modal_missing_visible() {
     node.set_prop("on_dismiss", PropValue::action("close"));
 
     let errors = validate_feedback_node(&node);
-    assert!(errors.iter().any(|e| e.contains("visible") && e.contains("required")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("visible") && e.contains("required")));
 }
 
 #[test]
@@ -109,7 +110,9 @@ fn modal_missing_on_dismiss() {
     node.set_prop("visible", PropValue::Bool(true));
 
     let errors = validate_feedback_node(&node);
-    assert!(errors.iter().any(|e| e.contains("on_dismiss") && e.contains("required")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("on_dismiss") && e.contains("required")));
 }
 
 #[test]
@@ -119,7 +122,9 @@ fn modal_wrong_visible_type() {
     node.set_prop("on_dismiss", PropValue::action("close"));
 
     let errors = validate_feedback_node(&node);
-    assert!(errors.iter().any(|e| e.contains("visible") && e.contains("expected bool")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("visible") && e.contains("expected bool")));
 }
 
 #[test]
@@ -129,7 +134,9 @@ fn modal_wrong_on_dismiss_type() {
     node.set_prop("on_dismiss", PropValue::String("close".into()));
 
     let errors = validate_feedback_node(&node);
-    assert!(errors.iter().any(|e| e.contains("on_dismiss") && e.contains("expected action")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("on_dismiss") && e.contains("expected action")));
 }
 
 #[test]
@@ -140,7 +147,9 @@ fn modal_unknown_prop() {
     node.set_prop("size", PropValue::String("large".into()));
 
     let errors = validate_feedback_node(&node);
-    assert!(errors.iter().any(|e| e.contains("unknown prop") && e.contains("size")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("unknown prop") && e.contains("size")));
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -166,10 +175,7 @@ fn toast_with_all_props() {
         .toast_type(ToastType::Error)
         .build();
 
-    assert_eq!(
-        node.props.get("duration"),
-        Some(&PropValue::Number(3000.0))
-    );
+    assert_eq!(node.props.get("duration"), Some(&PropValue::Number(3000.0)));
     assert_eq!(
         node.props.get("type"),
         Some(&PropValue::String("error".into()))
@@ -238,7 +244,9 @@ fn toast_valid_with_all() {
 fn toast_missing_message() {
     let node = SurfaceNode::new("Toast");
     let errors = validate_feedback_node(&node);
-    assert!(errors.iter().any(|e| e.contains("message") && e.contains("required")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("message") && e.contains("required")));
 }
 
 #[test]
@@ -247,7 +255,9 @@ fn toast_wrong_message_type() {
     node.set_prop("message", PropValue::Number(42.0));
 
     let errors = validate_feedback_node(&node);
-    assert!(errors.iter().any(|e| e.contains("message") && e.contains("expected string")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("message") && e.contains("expected string")));
 }
 
 #[test]
@@ -257,7 +267,9 @@ fn toast_wrong_duration_type() {
     node.set_prop("duration", PropValue::String("3000".into()));
 
     let errors = validate_feedback_node(&node);
-    assert!(errors.iter().any(|e| e.contains("duration") && e.contains("expected number")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("duration") && e.contains("expected number")));
 }
 
 #[test]
@@ -267,7 +279,9 @@ fn toast_invalid_type_enum() {
     node.set_prop("type", PropValue::String("critical".into()));
 
     let errors = validate_feedback_node(&node);
-    assert!(errors.iter().any(|e| e.contains("type") && e.contains("expected one of")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("type") && e.contains("expected one of")));
 }
 
 #[test]
@@ -286,7 +300,9 @@ fn toast_unknown_prop() {
     node.set_prop("color", PropValue::String("red".into()));
 
     let errors = validate_feedback_node(&node);
-    assert!(errors.iter().any(|e| e.contains("unknown prop") && e.contains("color")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("unknown prop") && e.contains("color")));
 }
 
 // ══════════════════════════════════════════════════════════════════════════════

@@ -4,8 +4,8 @@
 //! determinism. Follows the same pattern as content_tests.rs.
 
 use pepl_ui::{
-    ButtonBuilder, ButtonVariant, KeyboardType, PropValue, Surface, SurfaceNode,
-    TextInputBuilder, validate_interactive_node,
+    validate_interactive_node, ButtonBuilder, ButtonVariant, KeyboardType, PropValue, Surface,
+    SurfaceNode, TextInputBuilder,
 };
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -16,8 +16,14 @@ use pepl_ui::{
 fn button_minimal() {
     let node = ButtonBuilder::new("Save", PropValue::action("save")).build();
     assert_eq!(node.component_type, "Button");
-    assert_eq!(node.props.get("label"), Some(&PropValue::String("Save".into())));
-    assert!(matches!(node.props.get("on_tap"), Some(PropValue::ActionRef { .. })));
+    assert_eq!(
+        node.props.get("label"),
+        Some(&PropValue::String("Save".into()))
+    );
+    assert!(matches!(
+        node.props.get("on_tap"),
+        Some(PropValue::ActionRef { .. })
+    ));
     assert!(node.children.is_empty());
 }
 
@@ -83,18 +89,33 @@ fn button_loading() {
 
 #[test]
 fn button_all_props() {
-    let node = ButtonBuilder::new("Action", PropValue::action_with_args("do_thing", vec![PropValue::Number(42.0)]))
-        .variant(ButtonVariant::Outlined)
-        .icon("star")
-        .disabled(false)
-        .loading(true)
-        .build();
+    let node = ButtonBuilder::new(
+        "Action",
+        PropValue::action_with_args("do_thing", vec![PropValue::Number(42.0)]),
+    )
+    .variant(ButtonVariant::Outlined)
+    .icon("star")
+    .disabled(false)
+    .loading(true)
+    .build();
 
     assert_eq!(node.component_type, "Button");
-    assert_eq!(node.props.get("label"), Some(&PropValue::String("Action".into())));
-    assert!(matches!(node.props.get("on_tap"), Some(PropValue::ActionRef { .. })));
-    assert_eq!(node.props.get("variant"), Some(&PropValue::String("outlined".into())));
-    assert_eq!(node.props.get("icon"), Some(&PropValue::String("star".into())));
+    assert_eq!(
+        node.props.get("label"),
+        Some(&PropValue::String("Action".into()))
+    );
+    assert!(matches!(
+        node.props.get("on_tap"),
+        Some(PropValue::ActionRef { .. })
+    ));
+    assert_eq!(
+        node.props.get("variant"),
+        Some(&PropValue::String("outlined".into()))
+    );
+    assert_eq!(
+        node.props.get("icon"),
+        Some(&PropValue::String("star".into()))
+    );
     assert_eq!(node.props.get("disabled"), Some(&PropValue::Bool(false)));
     assert_eq!(node.props.get("loading"), Some(&PropValue::Bool(true)));
     assert!(node.children.is_empty());
@@ -102,10 +123,14 @@ fn button_all_props() {
 
 #[test]
 fn button_action_with_args() {
-    let node = ButtonBuilder::new("Add", PropValue::action_with_args("add_item", vec![
-        PropValue::String("foo".into()),
-        PropValue::Number(1.0),
-    ])).build();
+    let node = ButtonBuilder::new(
+        "Add",
+        PropValue::action_with_args(
+            "add_item",
+            vec![PropValue::String("foo".into()), PropValue::Number(1.0)],
+        ),
+    )
+    .build();
 
     match node.props.get("on_tap") {
         Some(PropValue::ActionRef { action, args }) => {
@@ -137,8 +162,11 @@ fn button_json_roundtrip() {
 
 #[test]
 fn button_json_roundtrip_with_args() {
-    let node = ButtonBuilder::new("X", PropValue::action_with_args("remove", vec![PropValue::Number(99.0)]))
-        .build();
+    let node = ButtonBuilder::new(
+        "X",
+        PropValue::action_with_args("remove", vec![PropValue::Number(99.0)]),
+    )
+    .build();
     let surface = Surface::new(node);
     let json = surface.to_json();
     let parsed: Surface = serde_json::from_str(&json).unwrap();
@@ -171,7 +199,9 @@ fn button_missing_label() {
     let mut node = SurfaceNode::new("Button");
     node.set_prop("on_tap", PropValue::action("tap"));
     let errors = validate_interactive_node(&node);
-    assert!(errors.iter().any(|e| e.contains("label") && e.contains("required")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("label") && e.contains("required")));
 }
 
 #[test]
@@ -179,7 +209,9 @@ fn button_missing_on_tap() {
     let mut node = SurfaceNode::new("Button");
     node.set_prop("label", PropValue::String("Click".into()));
     let errors = validate_interactive_node(&node);
-    assert!(errors.iter().any(|e| e.contains("on_tap") && e.contains("required")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("on_tap") && e.contains("required")));
 }
 
 #[test]
@@ -188,7 +220,9 @@ fn button_wrong_label_type() {
     node.set_prop("label", PropValue::Number(42.0));
     node.set_prop("on_tap", PropValue::action("x"));
     let errors = validate_interactive_node(&node);
-    assert!(errors.iter().any(|e| e.contains("label") && e.contains("string")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("label") && e.contains("string")));
 }
 
 #[test]
@@ -197,7 +231,9 @@ fn button_wrong_on_tap_type() {
     node.set_prop("label", PropValue::String("A".into()));
     node.set_prop("on_tap", PropValue::String("not_an_action".into()));
     let errors = validate_interactive_node(&node);
-    assert!(errors.iter().any(|e| e.contains("on_tap") && e.contains("action")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("on_tap") && e.contains("action")));
 }
 
 #[test]
@@ -217,7 +253,9 @@ fn button_wrong_icon_type() {
     node.set_prop("on_tap", PropValue::action("c"));
     node.set_prop("icon", PropValue::Number(123.0));
     let errors = validate_interactive_node(&node);
-    assert!(errors.iter().any(|e| e.contains("icon") && e.contains("string")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("icon") && e.contains("string")));
 }
 
 #[test]
@@ -227,7 +265,9 @@ fn button_wrong_disabled_type() {
     node.set_prop("on_tap", PropValue::action("d"));
     node.set_prop("disabled", PropValue::String("yes".into()));
     let errors = validate_interactive_node(&node);
-    assert!(errors.iter().any(|e| e.contains("disabled") && e.contains("bool")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("disabled") && e.contains("bool")));
 }
 
 #[test]
@@ -237,7 +277,9 @@ fn button_wrong_loading_type() {
     node.set_prop("on_tap", PropValue::action("e"));
     node.set_prop("loading", PropValue::Number(1.0));
     let errors = validate_interactive_node(&node);
-    assert!(errors.iter().any(|e| e.contains("loading") && e.contains("bool")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("loading") && e.contains("bool")));
 }
 
 #[test]
@@ -247,7 +289,9 @@ fn button_unknown_prop() {
     node.set_prop("on_tap", PropValue::action("f"));
     node.set_prop("color", PropValue::color(1.0, 0.0, 0.0, 1.0));
     let errors = validate_interactive_node(&node);
-    assert!(errors.iter().any(|e| e.contains("unknown prop") && e.contains("color")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("unknown prop") && e.contains("color")));
 }
 
 #[test]
@@ -273,8 +317,14 @@ fn button_multiple_errors() {
 fn text_input_minimal() {
     let node = TextInputBuilder::new("hello", PropValue::lambda(1)).build();
     assert_eq!(node.component_type, "TextInput");
-    assert_eq!(node.props.get("value"), Some(&PropValue::String("hello".into())));
-    assert!(matches!(node.props.get("on_change"), Some(PropValue::Lambda { .. })));
+    assert_eq!(
+        node.props.get("value"),
+        Some(&PropValue::String("hello".into()))
+    );
+    assert!(matches!(
+        node.props.get("on_change"),
+        Some(PropValue::Lambda { .. })
+    ));
     assert!(node.children.is_empty());
 }
 
@@ -360,7 +410,10 @@ fn text_input_max_length() {
     let node = TextInputBuilder::new("", PropValue::lambda(9))
         .max_length(100.0)
         .build();
-    assert_eq!(node.props.get("max_length"), Some(&PropValue::Number(100.0)));
+    assert_eq!(
+        node.props.get("max_length"),
+        Some(&PropValue::Number(100.0))
+    );
 }
 
 #[test]
@@ -382,12 +435,30 @@ fn text_input_all_props() {
         .build();
 
     assert_eq!(node.component_type, "TextInput");
-    assert_eq!(node.props.get("value"), Some(&PropValue::String("initial".into())));
-    assert!(matches!(node.props.get("on_change"), Some(PropValue::Lambda { lambda_id: 11 })));
-    assert_eq!(node.props.get("placeholder"), Some(&PropValue::String("Enter text".into())));
-    assert_eq!(node.props.get("label"), Some(&PropValue::String("Notes".into())));
-    assert_eq!(node.props.get("keyboard"), Some(&PropValue::String("text".into())));
-    assert_eq!(node.props.get("max_length"), Some(&PropValue::Number(500.0)));
+    assert_eq!(
+        node.props.get("value"),
+        Some(&PropValue::String("initial".into()))
+    );
+    assert!(matches!(
+        node.props.get("on_change"),
+        Some(PropValue::Lambda { lambda_id: 11 })
+    ));
+    assert_eq!(
+        node.props.get("placeholder"),
+        Some(&PropValue::String("Enter text".into()))
+    );
+    assert_eq!(
+        node.props.get("label"),
+        Some(&PropValue::String("Notes".into()))
+    );
+    assert_eq!(
+        node.props.get("keyboard"),
+        Some(&PropValue::String("text".into()))
+    );
+    assert_eq!(
+        node.props.get("max_length"),
+        Some(&PropValue::Number(500.0))
+    );
     assert_eq!(node.props.get("multiline"), Some(&PropValue::Bool(true)));
     assert!(node.children.is_empty());
 }
@@ -450,7 +521,9 @@ fn text_input_missing_value() {
     let mut node = SurfaceNode::new("TextInput");
     node.set_prop("on_change", PropValue::lambda(32));
     let errors = validate_interactive_node(&node);
-    assert!(errors.iter().any(|e| e.contains("value") && e.contains("required")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("value") && e.contains("required")));
 }
 
 #[test]
@@ -458,7 +531,9 @@ fn text_input_missing_on_change() {
     let mut node = SurfaceNode::new("TextInput");
     node.set_prop("value", PropValue::String("v".into()));
     let errors = validate_interactive_node(&node);
-    assert!(errors.iter().any(|e| e.contains("on_change") && e.contains("required")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("on_change") && e.contains("required")));
 }
 
 #[test]
@@ -467,7 +542,9 @@ fn text_input_wrong_value_type() {
     node.set_prop("value", PropValue::Number(42.0));
     node.set_prop("on_change", PropValue::lambda(33));
     let errors = validate_interactive_node(&node);
-    assert!(errors.iter().any(|e| e.contains("value") && e.contains("string")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("value") && e.contains("string")));
 }
 
 #[test]
@@ -476,7 +553,9 @@ fn text_input_wrong_on_change_type() {
     node.set_prop("value", PropValue::String("v".into()));
     node.set_prop("on_change", PropValue::action("not_lambda"));
     let errors = validate_interactive_node(&node);
-    assert!(errors.iter().any(|e| e.contains("on_change") && e.contains("lambda")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("on_change") && e.contains("lambda")));
 }
 
 #[test]
@@ -496,7 +575,9 @@ fn text_input_wrong_placeholder_type() {
     node.set_prop("on_change", PropValue::lambda(35));
     node.set_prop("placeholder", PropValue::Number(0.0));
     let errors = validate_interactive_node(&node);
-    assert!(errors.iter().any(|e| e.contains("placeholder") && e.contains("string")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("placeholder") && e.contains("string")));
 }
 
 #[test]
@@ -506,7 +587,9 @@ fn text_input_wrong_label_type() {
     node.set_prop("on_change", PropValue::lambda(36));
     node.set_prop("label", PropValue::Bool(true));
     let errors = validate_interactive_node(&node);
-    assert!(errors.iter().any(|e| e.contains("label") && e.contains("string")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("label") && e.contains("string")));
 }
 
 #[test]
@@ -516,7 +599,9 @@ fn text_input_wrong_max_length_type() {
     node.set_prop("on_change", PropValue::lambda(37));
     node.set_prop("max_length", PropValue::String("100".into()));
     let errors = validate_interactive_node(&node);
-    assert!(errors.iter().any(|e| e.contains("max_length") && e.contains("number")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("max_length") && e.contains("number")));
 }
 
 #[test]
@@ -526,7 +611,9 @@ fn text_input_wrong_multiline_type() {
     node.set_prop("on_change", PropValue::lambda(38));
     node.set_prop("multiline", PropValue::String("yes".into()));
     let errors = validate_interactive_node(&node);
-    assert!(errors.iter().any(|e| e.contains("multiline") && e.contains("bool")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("multiline") && e.contains("bool")));
 }
 
 #[test]
@@ -536,7 +623,9 @@ fn text_input_unknown_prop() {
     node.set_prop("on_change", PropValue::lambda(39));
     node.set_prop("autocomplete", PropValue::Bool(true));
     let errors = validate_interactive_node(&node);
-    assert!(errors.iter().any(|e| e.contains("unknown prop") && e.contains("autocomplete")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("unknown prop") && e.contains("autocomplete")));
 }
 
 #[test]
@@ -570,16 +659,20 @@ fn action_ref_serialization_no_args() {
 
 #[test]
 fn action_ref_serialization_with_args() {
-    let node = ButtonBuilder::new("Tap", PropValue::action_with_args("act", vec![
-        PropValue::String("hello".into()),
-        PropValue::Number(3.14),
-    ])).build();
+    let node = ButtonBuilder::new(
+        "Tap",
+        PropValue::action_with_args(
+            "act",
+            vec![PropValue::String("hello".into()), PropValue::Number(3.15)],
+        ),
+    )
+    .build();
     let surface = Surface::new(node);
     let json = surface.to_json();
     assert!(json.contains("\"__action\":\"act\""));
     assert!(json.contains("\"__args\""));
     assert!(json.contains("hello"));
-    assert!(json.contains("3.14"));
+    assert!(json.contains("3.15"));
 }
 
 #[test]
@@ -598,7 +691,9 @@ fn lambda_callback_serialization() {
 fn unknown_interactive_component() {
     let node = SurfaceNode::new("Slider");
     let errors = validate_interactive_node(&node);
-    assert!(errors.iter().any(|e| e.contains("Unknown interactive component")));
+    assert!(errors
+        .iter()
+        .any(|e| e.contains("Unknown interactive component")));
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -608,12 +703,15 @@ fn unknown_interactive_component() {
 #[test]
 fn interactive_determinism_100_iterations() {
     let build_button = || {
-        ButtonBuilder::new("Deterministic", PropValue::action_with_args("act", vec![PropValue::Number(1.0)]))
-            .variant(ButtonVariant::Filled)
-            .icon("check")
-            .disabled(false)
-            .loading(true)
-            .build()
+        ButtonBuilder::new(
+            "Deterministic",
+            PropValue::action_with_args("act", vec![PropValue::Number(1.0)]),
+        )
+        .variant(ButtonVariant::Filled)
+        .icon("check")
+        .disabled(false)
+        .loading(true)
+        .build()
     };
     let build_input = || {
         TextInputBuilder::new("det", PropValue::lambda(99))

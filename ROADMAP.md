@@ -161,14 +161,14 @@
 ## Phase 8: Final Validation
 
 ### 8.1 Integration Tests
-- [ ] All 10 components serialize to valid Surface JSON
-- [ ] Surface tree from canonical examples matches expected output
-- [ ] All components render in < 16ms budget
-- [ ] Component prop validation: wrong types produce clear errors
+- [x] All 10 components serialize to valid Surface JSON
+- [x] Surface tree from canonical examples matches expected output
+- [x] All components render in < 16ms budget
+- [x] Component prop validation: wrong types produce clear errors
 
 ### 8.2 Final Checks
-- [ ] Full 100-iteration determinism test across all components
-- [ ] `cargo clippy -- -D warnings` clean
-- [ ] `cargo fmt --check` clean
-- [ ] README.md with component reference and architecture overview
-- [ ] Every component has built-in accessibility support verified
+- [x] Full 100-iteration determinism test across all components
+- [x] `cargo clippy -- -D warnings` clean
+- [x] `cargo fmt --check` clean
+- [x] README.md with component reference and architecture overview
+- [x] Every component has built-in accessibility support verified

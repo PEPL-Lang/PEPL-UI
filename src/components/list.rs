@@ -71,10 +71,7 @@ impl ScrollListBuilder {
 pub fn validate_list_node(node: &SurfaceNode) -> Vec<String> {
     match node.component_type.as_str() {
         "ScrollList" => validate_scroll_list(node),
-        _ => vec![format!(
-            "Unknown list component: {}",
-            node.component_type
-        )],
+        _ => vec![format!("Unknown list component: {}", node.component_type)],
     }
 }
 

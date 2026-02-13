@@ -5,8 +5,8 @@
 //! - 7.2 Semantic Roles (default roles, role overrides, validation)
 
 use pepl_ui::accessibility::{
-    AccessibilityInfo, LiveRegion, SemanticRole, auto_accessible, default_role,
-    ensure_accessible, validate_accessible_prop,
+    auto_accessible, default_role, ensure_accessible, validate_accessible_prop, AccessibilityInfo,
+    LiveRegion, SemanticRole,
 };
 use pepl_ui::components::content::validate_content_node;
 use pepl_ui::components::feedback::validate_feedback_node;
@@ -344,10 +344,16 @@ fn validate_accessible_valid_minimal() {
 fn validate_accessible_valid_full() {
     let mut fields = BTreeMap::new();
     fields.insert("label".to_string(), PropValue::String("Save".to_string()));
-    fields.insert("hint".to_string(), PropValue::String("Saves data".to_string()));
+    fields.insert(
+        "hint".to_string(),
+        PropValue::String("Saves data".to_string()),
+    );
     fields.insert("role".to_string(), PropValue::String("button".to_string()));
     fields.insert("value".to_string(), PropValue::String("active".to_string()));
-    fields.insert("live_region".to_string(), PropValue::String("polite".to_string()));
+    fields.insert(
+        "live_region".to_string(),
+        PropValue::String("polite".to_string()),
+    );
     let prop = PropValue::Record(fields);
     let errors = validate_accessible_prop("Button", &prop);
     assert!(errors.is_empty(), "Unexpected errors: {:?}", errors);
@@ -406,7 +412,10 @@ fn validate_accessible_invalid_role() {
 fn validate_accessible_invalid_live_region() {
     let mut fields = BTreeMap::new();
     fields.insert("label".to_string(), PropValue::String("OK".to_string()));
-    fields.insert("live_region".to_string(), PropValue::String("off".to_string()));
+    fields.insert(
+        "live_region".to_string(),
+        PropValue::String("off".to_string()),
+    );
     let prop = PropValue::Record(fields);
     let errors = validate_accessible_prop("Toast", &prop);
     assert_eq!(errors.len(), 1);
@@ -524,10 +533,7 @@ fn text_input_builder_placeholder_fallback() {
         .build();
     match &node.props["accessible"] {
         PropValue::Record(fields) => {
-            assert_eq!(
-                fields["label"],
-                PropValue::String("Enter name".to_string())
-            );
+            assert_eq!(fields["label"], PropValue::String("Enter name".to_string()));
         }
         _ => panic!("Expected Record"),
     }
@@ -565,10 +571,7 @@ fn progress_bar_builder_has_accessible() {
                 fields["label"],
                 PropValue::String("50% complete".to_string())
             );
-            assert_eq!(
-                fields["role"],
-                PropValue::String("progressbar".to_string())
-            );
+            assert_eq!(fields["role"], PropValue::String("progressbar".to_string()));
             assert_eq!(fields["value"], PropValue::String("50%".to_string()));
         }
         _ => panic!("Expected Record"),
@@ -646,10 +649,7 @@ fn modal_builder_has_accessible() {
 
     match &node.props["accessible"] {
         PropValue::Record(fields) => {
-            assert_eq!(
-                fields["label"],
-                PropValue::String("Settings".to_string())
-            );
+            assert_eq!(fields["label"], PropValue::String("Settings".to_string()));
             assert_eq!(fields["role"], PropValue::String("dialog".to_string()));
         }
         _ => panic!("Expected Record"),
@@ -736,8 +736,7 @@ fn all_builders_pass_validation() {
     let button = ButtonBuilder::new("OK", PropValue::action("ok")).build();
     assert!(validate_interactive_node(&button).is_empty());
 
-    let text_input =
-        TextInputBuilder::new("val", PropValue::lambda(2)).build();
+    let text_input = TextInputBuilder::new("val", PropValue::lambda(2)).build();
     assert!(validate_interactive_node(&text_input).is_empty());
 
     // Content
@@ -804,10 +803,7 @@ fn all_valid_roles_pass_validation() {
     for role_str in SemanticRole::valid_values() {
         let mut fields = BTreeMap::new();
         fields.insert("label".to_string(), PropValue::String("test".to_string()));
-        fields.insert(
-            "role".to_string(),
-            PropValue::String(role_str.to_string()),
-        );
+        fields.insert("role".to_string(), PropValue::String(role_str.to_string()));
         let prop = PropValue::Record(fields);
         let errors = validate_accessible_prop("Button", &prop);
         assert!(

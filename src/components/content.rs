@@ -182,7 +182,10 @@ impl TextBuilder {
             node.set_prop("weight", PropValue::String(weight.as_str().to_string()));
         }
         if let Some(color) = self.color {
-            node.set_prop("color", PropValue::color(color.r, color.g, color.b, color.a));
+            node.set_prop(
+                "color",
+                PropValue::color(color.r, color.g, color.b, color.a),
+            );
         }
         if let Some(align) = self.align {
             node.set_prop("align", PropValue::String(align.as_str().to_string()));
@@ -255,10 +258,16 @@ impl ProgressBarBuilder {
         let mut node = SurfaceNode::new("ProgressBar");
         node.set_prop("value", PropValue::Number(self.value));
         if let Some(color) = self.color {
-            node.set_prop("color", PropValue::color(color.r, color.g, color.b, color.a));
+            node.set_prop(
+                "color",
+                PropValue::color(color.r, color.g, color.b, color.a),
+            );
         }
         if let Some(background) = self.background {
-            node.set_prop("background", PropValue::color(background.r, background.g, background.b, background.a));
+            node.set_prop(
+                "background",
+                PropValue::color(background.r, background.g, background.b, background.a),
+            );
         }
         if let Some(height) = self.height {
             node.set_prop("height", PropValue::Number(height));
@@ -278,7 +287,10 @@ pub fn validate_content_node(node: &SurfaceNode) -> Vec<String> {
     match node.component_type.as_str() {
         "Text" => validate_text(node),
         "ProgressBar" => validate_progress_bar(node),
-        _ => vec![format!("Unknown content component: {}", node.component_type)],
+        _ => vec![format!(
+            "Unknown content component: {}",
+            node.component_type
+        )],
     }
 }
 
@@ -298,7 +310,11 @@ fn validate_text(node: &SurfaceNode) -> Vec<String> {
     // Optional: size must be one of the allowed values
     if let Some(prop) = node.props.get("size") {
         match prop {
-            PropValue::String(s) if matches!(s.as_str(), "small" | "body" | "title" | "heading" | "display") => {}
+            PropValue::String(s)
+                if matches!(
+                    s.as_str(),
+                    "small" | "body" | "title" | "heading" | "display"
+                ) => {}
             _ => errors.push(format!(
                 "Text.size: expected one of [small, body, title, heading, display], got {:?}",
                 prop
@@ -376,7 +392,14 @@ fn validate_text(node: &SurfaceNode) -> Vec<String> {
     for key in node.props.keys() {
         if !matches!(
             key.as_str(),
-            "value" | "size" | "weight" | "color" | "align" | "max_lines" | "overflow" | "accessible"
+            "value"
+                | "size"
+                | "weight"
+                | "color"
+                | "align"
+                | "max_lines"
+                | "overflow"
+                | "accessible"
         ) {
             errors.push(format!("Text: unknown prop '{key}'"));
         }
@@ -443,7 +466,10 @@ fn validate_progress_bar(node: &SurfaceNode) -> Vec<String> {
 
     // Check for unknown props
     for key in node.props.keys() {
-        if !matches!(key.as_str(), "value" | "color" | "background" | "height" | "accessible") {
+        if !matches!(
+            key.as_str(),
+            "value" | "color" | "background" | "height" | "accessible"
+        ) {
             errors.push(format!("ProgressBar: unknown prop '{key}'"));
         }
     }

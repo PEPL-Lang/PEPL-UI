@@ -324,8 +324,7 @@ fn auto_label(component_type: &str, props: &BTreeMap<String, PropValue>) -> Stri
             .unwrap_or_else(|| "Text input".to_string()),
 
         "Text" => {
-            let value =
-                extract_string_prop(props, "value").unwrap_or_else(|| "Text".to_string());
+            let value = extract_string_prop(props, "value").unwrap_or_else(|| "Text".to_string());
             // Truncate long text for accessibility labels
             if value.len() > 100 {
                 format!("{}…", &value[..100])
@@ -343,12 +342,11 @@ fn auto_label(component_type: &str, props: &BTreeMap<String, PropValue>) -> Stri
             }
         }
 
-        "Modal" => {
-            extract_string_prop(props, "title").unwrap_or_else(|| "Dialog".to_string())
-        }
+        "Modal" => extract_string_prop(props, "title").unwrap_or_else(|| "Dialog".to_string()),
 
-        "Toast" => extract_string_prop(props, "message")
-            .unwrap_or_else(|| "Notification".to_string()),
+        "Toast" => {
+            extract_string_prop(props, "message").unwrap_or_else(|| "Notification".to_string())
+        }
 
         "ScrollList" => "List".to_string(),
 
@@ -375,10 +373,7 @@ fn extract_string_prop(props: &BTreeMap<String, PropValue>, key: &str) -> Option
 /// - `role`: string enum (optional) — one of the valid semantic roles
 /// - `value`: string (optional)
 /// - `live_region`: string enum (optional) — "polite" or "assertive"
-pub fn validate_accessible_prop(
-    component_name: &str,
-    prop: &PropValue,
-) -> Vec<String> {
+pub fn validate_accessible_prop(component_name: &str, prop: &PropValue) -> Vec<String> {
     let mut errors = Vec::new();
 
     let fields = match prop {
@@ -455,7 +450,10 @@ pub fn validate_accessible_prop(
 
     // Unknown fields
     for key in fields.keys() {
-        if !matches!(key.as_str(), "label" | "hint" | "role" | "value" | "live_region") {
+        if !matches!(
+            key.as_str(),
+            "label" | "hint" | "role" | "value" | "live_region"
+        ) {
             errors.push(format!(
                 "{component_name}.accessible: unknown field '{key}'"
             ));

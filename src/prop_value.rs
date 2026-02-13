@@ -21,12 +21,7 @@ pub enum PropValue {
     Nil,
 
     /// RGBA color as `{ r, g, b, a }` — each 0.0–1.0.
-    Color {
-        r: f64,
-        g: f64,
-        b: f64,
-        a: f64,
-    },
+    Color { r: f64, g: f64, b: f64, a: f64 },
 
     /// Action reference (e.g., `on_tap: "increment"`).
     /// Serialized as `{ "__action": "action_name" }` or

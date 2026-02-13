@@ -35,10 +35,8 @@ fn test_surface_node_builder() {
 
 #[test]
 fn test_surface_node_with_child() {
-    let child = SurfaceNode::new("Text")
-        .with_prop("value", PropValue::String("Hi".into()));
-    let parent = SurfaceNode::new("Column")
-        .with_child(child);
+    let child = SurfaceNode::new("Text").with_prop("value", PropValue::String("Hi".into()));
+    let parent = SurfaceNode::new("Column").with_child(child);
     assert_eq!(parent.children.len(), 1);
     assert_eq!(parent.children[0].component_type, "Text");
 }
@@ -65,8 +63,7 @@ fn test_surface_node_mutable_add_child() {
 #[test]
 fn test_surface_to_json_simple() {
     let surface = Surface::new(
-        SurfaceNode::new("Text")
-            .with_prop("value", PropValue::String("Hello".into())),
+        SurfaceNode::new("Text").with_prop("value", PropValue::String("Hello".into())),
     );
     let json = surface.to_json();
     let parsed: serde_json::Value = serde_json::from_str(&json).unwrap();
@@ -81,8 +78,7 @@ fn test_surface_to_json_nested() {
         SurfaceNode::new("Column")
             .with_prop("spacing", PropValue::Number(8.0))
             .with_child(
-                SurfaceNode::new("Text")
-                    .with_prop("value", PropValue::String("Title".into())),
+                SurfaceNode::new("Text").with_prop("value", PropValue::String("Title".into())),
             )
             .with_child(
                 SurfaceNode::new("Button")
@@ -174,8 +170,8 @@ fn test_prop_value_from_str() {
 
 #[test]
 fn test_prop_value_from_f64() {
-    let v: PropValue = 3.14.into();
-    assert_eq!(v, PropValue::Number(3.14));
+    let v: PropValue = 3.15.into();
+    assert_eq!(v, PropValue::Number(3.15));
 }
 
 #[test]
@@ -220,7 +216,12 @@ fn test_edges_from_number() {
 fn test_edges_sides() {
     let edges = Edges::sides(10.0, 20.0, 5.0, 5.0);
     match edges {
-        Edges::Sides { top, bottom, start, end } => {
+        Edges::Sides {
+            top,
+            bottom,
+            start,
+            end,
+        } => {
             assert_eq!(top, 10.0);
             assert_eq!(bottom, 20.0);
             assert_eq!(start, 5.0);
@@ -312,8 +313,16 @@ fn test_registry_all_component_names() {
     assert_eq!(
         names,
         vec![
-            "Button", "Column", "Modal", "ProgressBar", "Row",
-            "Scroll", "ScrollList", "Text", "TextInput", "Toast",
+            "Button",
+            "Column",
+            "Modal",
+            "ProgressBar",
+            "Row",
+            "Scroll",
+            "ScrollList",
+            "Text",
+            "TextInput",
+            "Toast",
         ]
     );
 }
@@ -321,7 +330,18 @@ fn test_registry_all_component_names() {
 #[test]
 fn test_registry_lookup_valid() {
     let reg = registry();
-    for name in &["Column", "Row", "Scroll", "Text", "ProgressBar", "Button", "TextInput", "ScrollList", "Modal", "Toast"] {
+    for name in &[
+        "Column",
+        "Row",
+        "Scroll",
+        "Text",
+        "ProgressBar",
+        "Button",
+        "TextInput",
+        "ScrollList",
+        "Modal",
+        "Toast",
+    ] {
         assert!(reg.is_valid(name), "{name} should be valid");
         let def = reg.get(name).unwrap();
         assert_eq!(def.name(), *name);
@@ -461,8 +481,7 @@ fn test_surface_schema_freeze() {
                     .with_prop("on_tap", PropValue::action("handle_click")),
             )
             .with_child(
-                SurfaceNode::new("ProgressBar")
-                    .with_prop("value", PropValue::Number(0.75)),
+                SurfaceNode::new("ProgressBar").with_prop("value", PropValue::Number(0.75)),
             ),
     );
 

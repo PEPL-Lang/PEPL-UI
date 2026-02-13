@@ -2,7 +2,7 @@
 
 The PEPL UI component model — deterministic surface tree rendering for PEPL programs.
 
-**Status:** Phase 7 complete (all 10 Phase 0 components + accessibility). See [ROADMAP.md](ROADMAP.md) for progress.
+**Status:** Phase 8 complete (all 10 Phase 0 components + accessibility + final validation). See [ROADMAP.md](ROADMAP.md) for progress.
 
 ## Components
 
@@ -21,7 +21,7 @@ The PEPL UI component model — deterministic surface tree rendering for PEPL pr
 
 ## Tests
 
-336 tests:
+379 tests:
 - Surface types & component registry: 42
 - Layout components (Column, Row, Scroll): 83
 - Content components (Text, ProgressBar): 55
@@ -29,6 +29,7 @@ The PEPL UI component model — deterministic surface tree rendering for PEPL pr
 - Collection components (ScrollList): 15
 - Feedback components (Modal, Toast): 25
 - Accessibility (accessible(), roles, auto-labels, validation): 58
+- Integration (all 10 components, canonical examples, render budget, determinism): 43
 - Doc-tests: 2
 
 ## Key Design Choices

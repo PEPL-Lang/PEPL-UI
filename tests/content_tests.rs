@@ -10,8 +10,8 @@
 //! 7. 100-iteration determinism
 
 use pepl_ui::{
-    ColorValue, ProgressBarBuilder, PropValue, Surface, SurfaceNode, TextAlign, TextBuilder,
-    TextOverflow, TextSize, TextWeight, validate_content_node,
+    validate_content_node, ColorValue, ProgressBarBuilder, PropValue, Surface, SurfaceNode,
+    TextAlign, TextBuilder, TextOverflow, TextSize, TextWeight,
 };
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -22,7 +22,10 @@ use pepl_ui::{
 fn test_text_minimal() {
     let node = TextBuilder::new("hello").build();
     assert_eq!(node.component_type, "Text");
-    assert_eq!(node.props.get("value"), Some(&PropValue::String("hello".into())));
+    assert_eq!(
+        node.props.get("value"),
+        Some(&PropValue::String("hello".into()))
+    );
     assert!(node.children.is_empty());
 }
 
@@ -66,15 +69,14 @@ fn test_text_with_align() {
 #[test]
 fn test_text_with_max_lines() {
     let node = TextBuilder::new("hi").max_lines(3.0).build();
-    assert_eq!(
-        node.props.get("max_lines"),
-        Some(&PropValue::Number(3.0))
-    );
+    assert_eq!(node.props.get("max_lines"), Some(&PropValue::Number(3.0)));
 }
 
 #[test]
 fn test_text_with_overflow() {
-    let node = TextBuilder::new("hi").overflow(TextOverflow::Ellipsis).build();
+    let node = TextBuilder::new("hi")
+        .overflow(TextOverflow::Ellipsis)
+        .build();
     assert_eq!(
         node.props.get("overflow"),
         Some(&PropValue::String("ellipsis".into()))
@@ -93,12 +95,27 @@ fn test_text_all_props() {
         .build();
     assert_eq!(node.component_type, "Text");
     assert_eq!(node.props.len(), 8);
-    assert_eq!(node.props.get("value"), Some(&PropValue::String("Hello!".into())));
-    assert_eq!(node.props.get("size"), Some(&PropValue::String("heading".into())));
-    assert_eq!(node.props.get("weight"), Some(&PropValue::String("medium".into())));
-    assert_eq!(node.props.get("align"), Some(&PropValue::String("end".into())));
+    assert_eq!(
+        node.props.get("value"),
+        Some(&PropValue::String("Hello!".into()))
+    );
+    assert_eq!(
+        node.props.get("size"),
+        Some(&PropValue::String("heading".into()))
+    );
+    assert_eq!(
+        node.props.get("weight"),
+        Some(&PropValue::String("medium".into()))
+    );
+    assert_eq!(
+        node.props.get("align"),
+        Some(&PropValue::String("end".into()))
+    );
     assert_eq!(node.props.get("max_lines"), Some(&PropValue::Number(2.0)));
-    assert_eq!(node.props.get("overflow"), Some(&PropValue::String("wrap".into())));
+    assert_eq!(
+        node.props.get("overflow"),
+        Some(&PropValue::String("wrap".into()))
+    );
 }
 
 #[test]
@@ -121,19 +138,28 @@ fn test_text_unicode() {
 #[test]
 fn test_text_size_small() {
     let node = TextBuilder::new("x").size(TextSize::Small).build();
-    assert_eq!(node.props.get("size"), Some(&PropValue::String("small".into())));
+    assert_eq!(
+        node.props.get("size"),
+        Some(&PropValue::String("small".into()))
+    );
 }
 
 #[test]
 fn test_text_size_body() {
     let node = TextBuilder::new("x").size(TextSize::Body).build();
-    assert_eq!(node.props.get("size"), Some(&PropValue::String("body".into())));
+    assert_eq!(
+        node.props.get("size"),
+        Some(&PropValue::String("body".into()))
+    );
 }
 
 #[test]
 fn test_text_size_display() {
     let node = TextBuilder::new("x").size(TextSize::Display).build();
-    assert_eq!(node.props.get("size"), Some(&PropValue::String("display".into())));
+    assert_eq!(
+        node.props.get("size"),
+        Some(&PropValue::String("display".into()))
+    );
 }
 
 // ── Text weights cover all variants ───────────────────────────────────────────
@@ -141,7 +167,10 @@ fn test_text_size_display() {
 #[test]
 fn test_text_weight_normal() {
     let node = TextBuilder::new("x").weight(TextWeight::Normal).build();
-    assert_eq!(node.props.get("weight"), Some(&PropValue::String("normal".into())));
+    assert_eq!(
+        node.props.get("weight"),
+        Some(&PropValue::String("normal".into()))
+    );
 }
 
 // ── Text align covers all variants ────────────────────────────────────────────
@@ -149,7 +178,10 @@ fn test_text_weight_normal() {
 #[test]
 fn test_text_align_start() {
     let node = TextBuilder::new("x").align(TextAlign::Start).build();
-    assert_eq!(node.props.get("align"), Some(&PropValue::String("start".into())));
+    assert_eq!(
+        node.props.get("align"),
+        Some(&PropValue::String("start".into()))
+    );
 }
 
 // ── Text overflow covers all variants ─────────────────────────────────────────
@@ -157,7 +189,10 @@ fn test_text_align_start() {
 #[test]
 fn test_text_overflow_clip() {
     let node = TextBuilder::new("x").overflow(TextOverflow::Clip).build();
-    assert_eq!(node.props.get("overflow"), Some(&PropValue::String("clip".into())));
+    assert_eq!(
+        node.props.get("overflow"),
+        Some(&PropValue::String("clip".into()))
+    );
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════

@@ -289,7 +289,11 @@ pub fn validate_layout_node(node: &SurfaceNode) -> Vec<String> {
                     "align" => {
                         if let PropValue::String(s) = val {
                             let valid = [
-                                "start", "center", "end", "stretch", "space_between",
+                                "start",
+                                "center",
+                                "end",
+                                "stretch",
+                                "space_between",
                                 "space_around",
                             ];
                             if !valid.contains(&s.as_str()) {
@@ -323,10 +327,7 @@ pub fn validate_layout_node(node: &SurfaceNode) -> Vec<String> {
                         ));
                     }
                     other => {
-                        errors.push(format!(
-                            "{}: unknown prop '{other}'",
-                            node.component_type
-                        ));
+                        errors.push(format!("{}: unknown prop '{other}'", node.component_type));
                     }
                 }
             }

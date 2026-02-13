@@ -142,14 +142,34 @@ impl Default for ComponentRegistry {
 
 struct ColumnDef;
 impl ComponentDef for ColumnDef {
-    fn name(&self) -> &'static str { "Column" }
-    fn accepts_children(&self) -> bool { true }
+    fn name(&self) -> &'static str {
+        "Column"
+    }
+    fn accepts_children(&self) -> bool {
+        true
+    }
     fn props(&self) -> &[PropDef] {
         static PROPS: &[PropDef] = &[
-            PropDef { name: "spacing", requirement: PropRequirement::Optional, prop_type: PropType::Number },
-            PropDef { name: "align", requirement: PropRequirement::Optional, prop_type: PropType::Alignment },
-            PropDef { name: "padding", requirement: PropRequirement::Optional, prop_type: PropType::Edges },
-            PropDef { name: "accessible", requirement: PropRequirement::Optional, prop_type: PropType::Record },
+            PropDef {
+                name: "spacing",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::Number,
+            },
+            PropDef {
+                name: "align",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::Alignment,
+            },
+            PropDef {
+                name: "padding",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::Edges,
+            },
+            PropDef {
+                name: "accessible",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::Record,
+            },
         ];
         PROPS
     }
@@ -157,14 +177,34 @@ impl ComponentDef for ColumnDef {
 
 struct RowDef;
 impl ComponentDef for RowDef {
-    fn name(&self) -> &'static str { "Row" }
-    fn accepts_children(&self) -> bool { true }
+    fn name(&self) -> &'static str {
+        "Row"
+    }
+    fn accepts_children(&self) -> bool {
+        true
+    }
     fn props(&self) -> &[PropDef] {
         static PROPS: &[PropDef] = &[
-            PropDef { name: "spacing", requirement: PropRequirement::Optional, prop_type: PropType::Number },
-            PropDef { name: "align", requirement: PropRequirement::Optional, prop_type: PropType::Alignment },
-            PropDef { name: "padding", requirement: PropRequirement::Optional, prop_type: PropType::Edges },
-            PropDef { name: "accessible", requirement: PropRequirement::Optional, prop_type: PropType::Record },
+            PropDef {
+                name: "spacing",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::Number,
+            },
+            PropDef {
+                name: "align",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::Alignment,
+            },
+            PropDef {
+                name: "padding",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::Edges,
+            },
+            PropDef {
+                name: "accessible",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::Record,
+            },
         ];
         PROPS
     }
@@ -172,8 +212,12 @@ impl ComponentDef for RowDef {
 
 struct ScrollDef;
 impl ComponentDef for ScrollDef {
-    fn name(&self) -> &'static str { "Scroll" }
-    fn accepts_children(&self) -> bool { true }
+    fn name(&self) -> &'static str {
+        "Scroll"
+    }
+    fn accepts_children(&self) -> bool {
+        true
+    }
     fn props(&self) -> &[PropDef] {
         static PROPS: &[PropDef] = &[
             PropDef {
@@ -181,7 +225,11 @@ impl ComponentDef for ScrollDef {
                 requirement: PropRequirement::Optional,
                 prop_type: PropType::StringEnum(&["vertical", "horizontal", "both"]),
             },
-            PropDef { name: "accessible", requirement: PropRequirement::Optional, prop_type: PropType::Record },
+            PropDef {
+                name: "accessible",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::Record,
+            },
         ];
         PROPS
     }
@@ -193,18 +241,54 @@ impl ComponentDef for ScrollDef {
 
 struct TextDef;
 impl ComponentDef for TextDef {
-    fn name(&self) -> &'static str { "Text" }
-    fn accepts_children(&self) -> bool { false }
+    fn name(&self) -> &'static str {
+        "Text"
+    }
+    fn accepts_children(&self) -> bool {
+        false
+    }
     fn props(&self) -> &[PropDef] {
         static PROPS: &[PropDef] = &[
-            PropDef { name: "value", requirement: PropRequirement::Required, prop_type: PropType::String },
-            PropDef { name: "size", requirement: PropRequirement::Optional, prop_type: PropType::StringEnum(&["small", "body", "title", "heading", "display"]) },
-            PropDef { name: "weight", requirement: PropRequirement::Optional, prop_type: PropType::StringEnum(&["normal", "medium", "bold"]) },
-            PropDef { name: "color", requirement: PropRequirement::Optional, prop_type: PropType::Color },
-            PropDef { name: "align", requirement: PropRequirement::Optional, prop_type: PropType::StringEnum(&["start", "center", "end"]) },
-            PropDef { name: "max_lines", requirement: PropRequirement::Optional, prop_type: PropType::Number },
-            PropDef { name: "overflow", requirement: PropRequirement::Optional, prop_type: PropType::StringEnum(&["clip", "ellipsis", "wrap"]) },
-            PropDef { name: "accessible", requirement: PropRequirement::Optional, prop_type: PropType::Record },
+            PropDef {
+                name: "value",
+                requirement: PropRequirement::Required,
+                prop_type: PropType::String,
+            },
+            PropDef {
+                name: "size",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::StringEnum(&["small", "body", "title", "heading", "display"]),
+            },
+            PropDef {
+                name: "weight",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::StringEnum(&["normal", "medium", "bold"]),
+            },
+            PropDef {
+                name: "color",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::Color,
+            },
+            PropDef {
+                name: "align",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::StringEnum(&["start", "center", "end"]),
+            },
+            PropDef {
+                name: "max_lines",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::Number,
+            },
+            PropDef {
+                name: "overflow",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::StringEnum(&["clip", "ellipsis", "wrap"]),
+            },
+            PropDef {
+                name: "accessible",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::Record,
+            },
         ];
         PROPS
     }
@@ -212,15 +296,39 @@ impl ComponentDef for TextDef {
 
 struct ProgressBarDef;
 impl ComponentDef for ProgressBarDef {
-    fn name(&self) -> &'static str { "ProgressBar" }
-    fn accepts_children(&self) -> bool { false }
+    fn name(&self) -> &'static str {
+        "ProgressBar"
+    }
+    fn accepts_children(&self) -> bool {
+        false
+    }
     fn props(&self) -> &[PropDef] {
         static PROPS: &[PropDef] = &[
-            PropDef { name: "value", requirement: PropRequirement::Required, prop_type: PropType::Number },
-            PropDef { name: "color", requirement: PropRequirement::Optional, prop_type: PropType::Color },
-            PropDef { name: "background", requirement: PropRequirement::Optional, prop_type: PropType::Color },
-            PropDef { name: "height", requirement: PropRequirement::Optional, prop_type: PropType::Number },
-            PropDef { name: "accessible", requirement: PropRequirement::Optional, prop_type: PropType::Record },
+            PropDef {
+                name: "value",
+                requirement: PropRequirement::Required,
+                prop_type: PropType::Number,
+            },
+            PropDef {
+                name: "color",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::Color,
+            },
+            PropDef {
+                name: "background",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::Color,
+            },
+            PropDef {
+                name: "height",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::Number,
+            },
+            PropDef {
+                name: "accessible",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::Record,
+            },
         ];
         PROPS
     }
@@ -232,17 +340,49 @@ impl ComponentDef for ProgressBarDef {
 
 struct ButtonDef;
 impl ComponentDef for ButtonDef {
-    fn name(&self) -> &'static str { "Button" }
-    fn accepts_children(&self) -> bool { false }
+    fn name(&self) -> &'static str {
+        "Button"
+    }
+    fn accepts_children(&self) -> bool {
+        false
+    }
     fn props(&self) -> &[PropDef] {
         static PROPS: &[PropDef] = &[
-            PropDef { name: "label", requirement: PropRequirement::Required, prop_type: PropType::String },
-            PropDef { name: "on_tap", requirement: PropRequirement::Required, prop_type: PropType::Action },
-            PropDef { name: "variant", requirement: PropRequirement::Optional, prop_type: PropType::StringEnum(&["filled", "outlined", "text"]) },
-            PropDef { name: "icon", requirement: PropRequirement::Optional, prop_type: PropType::String },
-            PropDef { name: "disabled", requirement: PropRequirement::Optional, prop_type: PropType::Bool },
-            PropDef { name: "loading", requirement: PropRequirement::Optional, prop_type: PropType::Bool },
-            PropDef { name: "accessible", requirement: PropRequirement::Optional, prop_type: PropType::Record },
+            PropDef {
+                name: "label",
+                requirement: PropRequirement::Required,
+                prop_type: PropType::String,
+            },
+            PropDef {
+                name: "on_tap",
+                requirement: PropRequirement::Required,
+                prop_type: PropType::Action,
+            },
+            PropDef {
+                name: "variant",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::StringEnum(&["filled", "outlined", "text"]),
+            },
+            PropDef {
+                name: "icon",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::String,
+            },
+            PropDef {
+                name: "disabled",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::Bool,
+            },
+            PropDef {
+                name: "loading",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::Bool,
+            },
+            PropDef {
+                name: "accessible",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::Record,
+            },
         ];
         PROPS
     }
@@ -250,18 +390,54 @@ impl ComponentDef for ButtonDef {
 
 struct TextInputDef;
 impl ComponentDef for TextInputDef {
-    fn name(&self) -> &'static str { "TextInput" }
-    fn accepts_children(&self) -> bool { false }
+    fn name(&self) -> &'static str {
+        "TextInput"
+    }
+    fn accepts_children(&self) -> bool {
+        false
+    }
     fn props(&self) -> &[PropDef] {
         static PROPS: &[PropDef] = &[
-            PropDef { name: "value", requirement: PropRequirement::Required, prop_type: PropType::String },
-            PropDef { name: "on_change", requirement: PropRequirement::Required, prop_type: PropType::Lambda },
-            PropDef { name: "placeholder", requirement: PropRequirement::Optional, prop_type: PropType::String },
-            PropDef { name: "label", requirement: PropRequirement::Optional, prop_type: PropType::String },
-            PropDef { name: "keyboard", requirement: PropRequirement::Optional, prop_type: PropType::StringEnum(&["text", "number", "email", "phone", "url"]) },
-            PropDef { name: "max_length", requirement: PropRequirement::Optional, prop_type: PropType::Number },
-            PropDef { name: "multiline", requirement: PropRequirement::Optional, prop_type: PropType::Bool },
-            PropDef { name: "accessible", requirement: PropRequirement::Optional, prop_type: PropType::Record },
+            PropDef {
+                name: "value",
+                requirement: PropRequirement::Required,
+                prop_type: PropType::String,
+            },
+            PropDef {
+                name: "on_change",
+                requirement: PropRequirement::Required,
+                prop_type: PropType::Lambda,
+            },
+            PropDef {
+                name: "placeholder",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::String,
+            },
+            PropDef {
+                name: "label",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::String,
+            },
+            PropDef {
+                name: "keyboard",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::StringEnum(&["text", "number", "email", "phone", "url"]),
+            },
+            PropDef {
+                name: "max_length",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::Number,
+            },
+            PropDef {
+                name: "multiline",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::Bool,
+            },
+            PropDef {
+                name: "accessible",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::Record,
+            },
         ];
         PROPS
     }
@@ -273,16 +449,44 @@ impl ComponentDef for TextInputDef {
 
 struct ScrollListDef;
 impl ComponentDef for ScrollListDef {
-    fn name(&self) -> &'static str { "ScrollList" }
-    fn accepts_children(&self) -> bool { false }
+    fn name(&self) -> &'static str {
+        "ScrollList"
+    }
+    fn accepts_children(&self) -> bool {
+        false
+    }
     fn props(&self) -> &[PropDef] {
         static PROPS: &[PropDef] = &[
-            PropDef { name: "items", requirement: PropRequirement::Required, prop_type: PropType::List },
-            PropDef { name: "render", requirement: PropRequirement::Required, prop_type: PropType::Lambda },
-            PropDef { name: "key", requirement: PropRequirement::Required, prop_type: PropType::Lambda },
-            PropDef { name: "on_reorder", requirement: PropRequirement::Optional, prop_type: PropType::Lambda },
-            PropDef { name: "dividers", requirement: PropRequirement::Optional, prop_type: PropType::Bool },
-            PropDef { name: "accessible", requirement: PropRequirement::Optional, prop_type: PropType::Record },
+            PropDef {
+                name: "items",
+                requirement: PropRequirement::Required,
+                prop_type: PropType::List,
+            },
+            PropDef {
+                name: "render",
+                requirement: PropRequirement::Required,
+                prop_type: PropType::Lambda,
+            },
+            PropDef {
+                name: "key",
+                requirement: PropRequirement::Required,
+                prop_type: PropType::Lambda,
+            },
+            PropDef {
+                name: "on_reorder",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::Lambda,
+            },
+            PropDef {
+                name: "dividers",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::Bool,
+            },
+            PropDef {
+                name: "accessible",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::Record,
+            },
         ];
         PROPS
     }
@@ -294,14 +498,34 @@ impl ComponentDef for ScrollListDef {
 
 struct ModalDef;
 impl ComponentDef for ModalDef {
-    fn name(&self) -> &'static str { "Modal" }
-    fn accepts_children(&self) -> bool { true }
+    fn name(&self) -> &'static str {
+        "Modal"
+    }
+    fn accepts_children(&self) -> bool {
+        true
+    }
     fn props(&self) -> &[PropDef] {
         static PROPS: &[PropDef] = &[
-            PropDef { name: "visible", requirement: PropRequirement::Required, prop_type: PropType::Bool },
-            PropDef { name: "on_dismiss", requirement: PropRequirement::Required, prop_type: PropType::Action },
-            PropDef { name: "title", requirement: PropRequirement::Optional, prop_type: PropType::String },
-            PropDef { name: "accessible", requirement: PropRequirement::Optional, prop_type: PropType::Record },
+            PropDef {
+                name: "visible",
+                requirement: PropRequirement::Required,
+                prop_type: PropType::Bool,
+            },
+            PropDef {
+                name: "on_dismiss",
+                requirement: PropRequirement::Required,
+                prop_type: PropType::Action,
+            },
+            PropDef {
+                name: "title",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::String,
+            },
+            PropDef {
+                name: "accessible",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::Record,
+            },
         ];
         PROPS
     }
@@ -309,14 +533,34 @@ impl ComponentDef for ModalDef {
 
 struct ToastDef;
 impl ComponentDef for ToastDef {
-    fn name(&self) -> &'static str { "Toast" }
-    fn accepts_children(&self) -> bool { false }
+    fn name(&self) -> &'static str {
+        "Toast"
+    }
+    fn accepts_children(&self) -> bool {
+        false
+    }
     fn props(&self) -> &[PropDef] {
         static PROPS: &[PropDef] = &[
-            PropDef { name: "message", requirement: PropRequirement::Required, prop_type: PropType::String },
-            PropDef { name: "duration", requirement: PropRequirement::Optional, prop_type: PropType::Number },
-            PropDef { name: "type", requirement: PropRequirement::Optional, prop_type: PropType::StringEnum(&["info", "success", "warning", "error"]) },
-            PropDef { name: "accessible", requirement: PropRequirement::Optional, prop_type: PropType::Record },
+            PropDef {
+                name: "message",
+                requirement: PropRequirement::Required,
+                prop_type: PropType::String,
+            },
+            PropDef {
+                name: "duration",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::Number,
+            },
+            PropDef {
+                name: "type",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::StringEnum(&["info", "success", "warning", "error"]),
+            },
+            PropDef {
+                name: "accessible",
+                requirement: PropRequirement::Optional,
+                prop_type: PropType::Record,
+            },
         ];
         PROPS
     }

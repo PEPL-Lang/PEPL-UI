@@ -1,8 +1,8 @@
 //! Integration tests for `pepl-ui` Phase 2: Layout components (Column, Row, Scroll).
 
 use pepl_ui::{
-    Alignment, ColumnBuilder, Edges, PropValue, RowBuilder, ScrollBuilder, ScrollDirection,
-    Surface, SurfaceNode, validate_layout_node,
+    validate_layout_node, Alignment, ColumnBuilder, Edges, PropValue, RowBuilder, ScrollBuilder,
+    ScrollDirection, Surface, SurfaceNode,
 };
 use std::collections::BTreeMap;
 
@@ -50,44 +50,30 @@ fn test_column_spacing_zero() {
 #[test]
 fn test_column_with_align_start() {
     let node = ColumnBuilder::new().align(Alignment::Start).build();
-    assert_eq!(
-        node.props["align"],
-        PropValue::String("start".into())
-    );
+    assert_eq!(node.props["align"], PropValue::String("start".into()));
 }
 
 #[test]
 fn test_column_with_align_center() {
     let node = ColumnBuilder::new().align(Alignment::Center).build();
-    assert_eq!(
-        node.props["align"],
-        PropValue::String("center".into())
-    );
+    assert_eq!(node.props["align"], PropValue::String("center".into()));
 }
 
 #[test]
 fn test_column_with_align_end() {
     let node = ColumnBuilder::new().align(Alignment::End).build();
-    assert_eq!(
-        node.props["align"],
-        PropValue::String("end".into())
-    );
+    assert_eq!(node.props["align"], PropValue::String("end".into()));
 }
 
 #[test]
 fn test_column_with_align_stretch() {
     let node = ColumnBuilder::new().align(Alignment::Stretch).build();
-    assert_eq!(
-        node.props["align"],
-        PropValue::String("stretch".into())
-    );
+    assert_eq!(node.props["align"], PropValue::String("stretch".into()));
 }
 
 #[test]
 fn test_column_with_align_space_between() {
-    let node = ColumnBuilder::new()
-        .align(Alignment::SpaceBetween)
-        .build();
+    let node = ColumnBuilder::new().align(Alignment::SpaceBetween).build();
     assert_eq!(
         node.props["align"],
         PropValue::String("space_between".into())
@@ -96,9 +82,7 @@ fn test_column_with_align_space_between() {
 
 #[test]
 fn test_column_with_align_space_around() {
-    let node = ColumnBuilder::new()
-        .align(Alignment::SpaceAround)
-        .build();
+    let node = ColumnBuilder::new().align(Alignment::SpaceAround).build();
     assert_eq!(
         node.props["align"],
         PropValue::String("space_around".into())
@@ -107,9 +91,7 @@ fn test_column_with_align_space_around() {
 
 #[test]
 fn test_column_with_padding_uniform() {
-    let node = ColumnBuilder::new()
-        .padding(Edges::Uniform(16.0))
-        .build();
+    let node = ColumnBuilder::new().padding(Edges::Uniform(16.0)).build();
     assert_eq!(node.props["padding"], PropValue::Number(16.0));
 }
 
@@ -124,7 +106,10 @@ fn test_column_with_padding_sides() {
         assert_eq!(map["start"], PropValue::Number(30.0));
         assert_eq!(map["end"], PropValue::Number(40.0));
     } else {
-        panic!("Expected Record for Sides padding, got {:?}", node.props["padding"]);
+        panic!(
+            "Expected Record for Sides padding, got {:?}",
+            node.props["padding"]
+        );
     }
 }
 
@@ -142,9 +127,7 @@ fn test_column_with_all_props() {
 
 #[test]
 fn test_column_with_single_child() {
-    let node = ColumnBuilder::new()
-        .child(text_node("Hello"))
-        .build();
+    let node = ColumnBuilder::new().child(text_node("Hello")).build();
     assert_eq!(node.children.len(), 1);
     assert_eq!(node.children[0].component_type, "Text");
 }
@@ -215,9 +198,7 @@ fn test_row_with_align_center() {
 
 #[test]
 fn test_row_with_padding_uniform() {
-    let node = RowBuilder::new()
-        .padding(Edges::Uniform(24.0))
-        .build();
+    let node = RowBuilder::new().padding(Edges::Uniform(24.0)).build();
     assert_eq!(node.props["padding"], PropValue::Number(24.0));
 }
 
@@ -250,8 +231,14 @@ fn test_row_with_children() {
         .child(button_node("OK"))
         .build();
     assert_eq!(node.children.len(), 2);
-    assert_eq!(node.children[0].props["label"], PropValue::String("Cancel".into()));
-    assert_eq!(node.children[1].props["label"], PropValue::String("OK".into()));
+    assert_eq!(
+        node.children[0].props["label"],
+        PropValue::String("Cancel".into())
+    );
+    assert_eq!(
+        node.children[1].props["label"],
+        PropValue::String("OK".into())
+    );
 }
 
 #[test]
@@ -311,10 +298,7 @@ fn test_scroll_both() {
     let node = ScrollBuilder::new()
         .direction(ScrollDirection::Both)
         .build();
-    assert_eq!(
-        node.props["direction"],
-        PropValue::String("both".into())
-    );
+    assert_eq!(node.props["direction"], PropValue::String("both".into()));
 }
 
 #[test]
@@ -368,7 +352,7 @@ fn test_scroll_direction_default() {
 #[test]
 fn test_scroll_direction_clone() {
     let d = ScrollDirection::Both;
-    let d2 = d.clone();
+    let d2 = d;
     assert_eq!(d, d2);
 }
 
@@ -419,9 +403,7 @@ fn test_row_in_column() {
 
 #[test]
 fn test_deeply_nested_layout() {
-    let inner = ColumnBuilder::new()
-        .child(text_node("Deep"))
-        .build();
+    let inner = ColumnBuilder::new().child(text_node("Deep")).build();
     let middle = RowBuilder::new().child(inner).build();
     let outer = ColumnBuilder::new().child(middle).build();
     let scroll = ScrollBuilder::new().child(outer).build();
@@ -534,17 +516,13 @@ fn test_all_alignments_row() {
 #[test]
 fn test_edges_uniform_coercion_number() {
     // Uniform(n) should produce PropValue::Number(n), matching number literal coercion.
-    let node = ColumnBuilder::new()
-        .padding(Edges::Uniform(0.0))
-        .build();
+    let node = ColumnBuilder::new().padding(Edges::Uniform(0.0)).build();
     assert_eq!(node.props["padding"], PropValue::Number(0.0));
 }
 
 #[test]
 fn test_edges_uniform_coercion_large() {
-    let node = RowBuilder::new()
-        .padding(Edges::Uniform(100.0))
-        .build();
+    let node = RowBuilder::new().padding(Edges::Uniform(100.0)).build();
     assert_eq!(node.props["padding"], PropValue::Number(100.0));
 }
 
@@ -936,10 +914,7 @@ fn test_complex_layout_deterministic() {
 #[test]
 fn test_column_overwrite_spacing() {
     // Last call wins
-    let node = ColumnBuilder::new()
-        .spacing(4.0)
-        .spacing(8.0)
-        .build();
+    let node = ColumnBuilder::new().spacing(4.0).spacing(8.0).build();
     assert_eq!(node.props["spacing"], PropValue::Number(8.0));
 }
 
