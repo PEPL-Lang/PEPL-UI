@@ -40,27 +40,27 @@
 ## Phase 2: Layout Components
 
 ### 2.1 `Column` Component
-- [ ] Props: `spacing?: number`, `align?: alignment`, `padding?: edges`
-- [ ] Accepts children
-- [ ] Serializes to Surface node with correct prop types
-- [ ] Unit tests (required props, optional props, children)
+- [x] Props: `spacing?: number`, `align?: alignment`, `padding?: edges`
+- [x] Accepts children
+- [x] Serializes to Surface node with correct prop types
+- [x] Unit tests (required props, optional props, children)
 
 ### 2.2 `Row` Component
-- [ ] Props: `spacing?: number`, `align?: alignment`, `padding?: edges`
-- [ ] Accepts children
-- [ ] Unit tests
+- [x] Props: `spacing?: number`, `align?: alignment`, `padding?: edges`
+- [x] Accepts children
+- [x] Unit tests
 
 ### 2.3 `Scroll` Component
-- [ ] Props: `direction?: "vertical" | "horizontal" | "both"`
-- [ ] Accepts children
-- [ ] Default direction: "vertical"
-- [ ] Unit tests
+- [x] Props: `direction?: "vertical" | "horizontal" | "both"`
+- [x] Accepts children
+- [x] Default direction: "vertical"
+- [x] Unit tests
 
 ### 2.4 Layout Tests
-- [ ] Test nested Column/Row combinations
-- [ ] Test all alignment values
-- [ ] Test edges coercion (number → Uniform, explicit Sides)
-- [ ] 100-iteration determinism test
+- [x] Test nested Column/Row combinations
+- [x] Test all alignment values
+- [x] Test edges coercion (number → Uniform, explicit Sides)
+- [x] 100-iteration determinism test
 
 ---
 

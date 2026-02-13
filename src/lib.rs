@@ -19,11 +19,15 @@
 //! | List & Data | ScrollList |
 //! | Feedback | Modal, Toast |
 
+pub mod components;
 mod prop_value;
 mod registry;
 mod surface;
 mod types;
 
+pub use components::layout::{
+    ColumnBuilder, RowBuilder, ScrollBuilder, ScrollDirection, validate_layout_node,
+};
 pub use prop_value::PropValue;
 pub use registry::{ComponentDef, ComponentRegistry, PropDef, PropRequirement};
 pub use surface::{Surface, SurfaceNode};
