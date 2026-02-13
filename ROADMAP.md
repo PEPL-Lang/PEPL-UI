@@ -67,18 +67,27 @@
 ## Phase 3: Content Components
 
 ### 3.1 `Text` Component
-- [ ] Props: `value: string` (required), `size?: "small"|"body"|"title"|"heading"|"display"`, `weight?: "normal"|"medium"|"bold"`, `color?: color`, `align?: "start"|"center"|"end"`, `max_lines?: number`, `overflow?: "clip"|"ellipsis"|"wrap"`
-- [ ] No children
-- [ ] Unit tests for all prop variants
+- [x] Props: `value: string` (required), `size?: "small"|"body"|"title"|"heading"|"display"`, `weight?: "normal"|"medium"|"bold"`, `color?: color`, `align?: "start"|"center"|"end"`, `max_lines?: number`, `overflow?: "clip"|"ellipsis"|"wrap"`
+- [x] No children
+- [x] Type-safe enums: TextSize, TextWeight, TextAlign, TextOverflow
+- [x] TextBuilder with fluent API
+- [x] Validation: required prop check, enum value check, type check, unknown prop check, no-children check
+- [x] Unit tests for all prop variants
+- [x] JSON roundtrip + determinism tests
 
 ### 3.2 `ProgressBar` Component
-- [ ] Props: `value: number` (required, 0.0–1.0), `color?: color`, `background?: color`, `height?: number`
-- [ ] Values outside 0.0–1.0 are clamped
-- [ ] No children
-- [ ] Unit tests (within range, clamping, color props)
+- [x] Props: `value: number` (required, 0.0–1.0), `color?: color`, `background?: color`, `height?: number`
+- [x] Values outside 0.0–1.0 are clamped
+- [x] No children
+- [x] ProgressBarBuilder with fluent API
+- [x] Validation: required prop check, type check, unknown prop check, no-children check
+- [x] Unit tests (within range, clamping, color props)
 
 ### 3.3 Content Tests
-- [ ] 100-iteration determinism test
+- [x] 55 content component tests
+- [x] 100-iteration determinism tests for both Text and ProgressBar
+- [x] Validation tests (missing required, wrong types, unknown props, multiple errors)
+- [x] `cargo clippy` clean
 
 ---
 

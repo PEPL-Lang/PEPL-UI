@@ -25,6 +25,10 @@ mod registry;
 mod surface;
 mod types;
 
+pub use components::content::{
+    ProgressBarBuilder, TextAlign, TextBuilder, TextOverflow, TextSize, TextWeight,
+    validate_content_node,
+};
 pub use components::layout::{
     ColumnBuilder, RowBuilder, ScrollBuilder, ScrollDirection, validate_layout_node,
 };
