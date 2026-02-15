@@ -1,6 +1,7 @@
 # pepl-ui
 
 [![crates.io](https://img.shields.io/crates/v/pepl-ui.svg)](https://crates.io/crates/pepl-ui)
+[![docs.rs](https://docs.rs/pepl-ui/badge.svg)](https://docs.rs/pepl-ui)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 The PEPL UI component model — deterministic surface tree rendering for PEPL programs.
