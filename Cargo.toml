@@ -1,10 +1,11 @@
 [package]
 name = "pepl-ui"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 license = "MIT"
 repository = "https://github.com/pepl-lang/pepl-ui"
 description = "UI component model for the PEPL language"
+authors = ["PEPL Team"]
 
 [dependencies]
 serde = { version = "1", features = ["derive"] }
